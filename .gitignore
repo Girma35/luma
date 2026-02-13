@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Environment
+.env
+
+# Data
+enterprise-knowledge-agent/data/*
+!enterprise-knowledge-agent/data/.gitkeep
