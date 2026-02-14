@@ -1,0 +1,176 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Sidebar } from '../../components/Sidebar';
+import { Header } from '../../components/Header';
+---
+
+<Layout title="Vendor Intelligence - ReOrder AI">
+  <div class="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark">
+    <Sidebar currentPath="/suppliers" />
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col overflow-y-auto">
+      <!-- Top Header -->
+      <Header />
+
+      <div class="flex-1 px-4 md:px-10 py-8 max-w-[1400px] mx-auto w-full">
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div class="bg-white p-6 border border-slate-200 shadow-sm">
+            <p class="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-1">Vendor Health Index</p>
+            <div class="flex items-end justify-between">
+              <p class="text-3xl font-black text-black tracking-tighter">94.2%</p>
+              <span class="text-success text-[10px] font-black tracking-widest flex items-center">
+                <span class="material-symbols-outlined text-sm mr-1">trending_up</span>+2.1%
+              </span>
+            </div>
+          </div>
+          <div class="bg-white p-6 border border-slate-200 shadow-sm">
+            <p class="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-1">Lead Time Efficiency</p>
+            <div class="flex items-end justify-between">
+              <p class="text-3xl font-black text-black tracking-tighter">12.4d</p>
+              <span class="text-success text-[10px] font-black tracking-widest flex items-center">
+                <span class="material-symbols-outlined text-sm mr-1">bolt</span>STRONG
+              </span>
+            </div>
+          </div>
+          <div class="bg-white p-6 border border-slate-200 shadow-sm">
+            <p class="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-1">On-Time Accuracy</p>
+            <div class="flex items-end justify-between">
+              <p class="text-3xl font-black text-black tracking-tighter">98.2%</p>
+              <span class="text-success text-[10px] font-black tracking-widest uppercase">Target Met</span>
+            </div>
+          </div>
+          <div class="bg-white p-6 border border-slate-200 shadow-sm border-l-4 border-accent">
+            <p class="text-accent text-[9px] font-black uppercase tracking-widest mb-1">Vendor Risks</p>
+            <div class="flex items-end justify-between">
+              <p class="text-3xl font-black text-accent tracking-tighter">12</p>
+              <span class="text-accent text-[8px] font-black px-2 py-0.5 bg-accent/10 rounded uppercase tracking-widest">Urgent</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filters and Actions -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10 border-b border-slate-100 pb-6">
+          <div class="flex flex-wrap gap-3">
+            <button class="flex items-center gap-2 bg-black text-white px-6 py-2 rounded text-[10px] font-black uppercase tracking-widest shadow-xl hover:bg-slate-800 transition-all">
+              <span class="material-symbols-outlined text-lg">tune</span>
+              Advanced Filters
+            </button>
+            <div class="flex bg-slate-100 rounded p-1">
+              <button class="px-4 py-1.5 rounded text-[9px] font-black uppercase bg-white shadow-sm tracking-widest">All Vendors</button>
+              <button class="px-4 py-1.5 rounded text-[9px] font-black uppercase text-slate-400 tracking-widest hover:text-black transition-colors">Strategic</button>
+            </div>
+          </div>
+          <button class="flex items-center gap-2 border border-black text-black px-6 py-2 rounded text-[10px] font-black uppercase tracking-widest hover:bg-black hover:text-white transition-all">
+            <span class="material-symbols-outlined text-lg">add_circle</span>
+            Onboard Vendor
+          </button>
+        </div>
+
+        <!-- Supplier Grid -->
+        <div class="grid grid-cols-1 gap-6">
+          <!-- Card High Performance -->
+          <div class="bg-white border border-slate-200 p-6 flex flex-col lg:flex-row items-start lg:items-center gap-8 shadow-sm hover:shadow-xl transition-all cursor-pointer group hover:border-black">
+            <div class="flex items-center gap-4 min-w-[320px]">
+              <div class="size-14 bg-black text-white rounded flex items-center justify-center">
+                <span class="material-symbols-outlined text-3xl">precision_manufacturing</span>
+              </div>
+              <div>
+                <h3 class="font-black text-black text-lg uppercase tracking-tighter">Global Circuits Ltd.</h3>
+                <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Tier 1 Supplier • Shenzhen, CN</p>
+              </div>
+            </div>
+            <div class="flex-1 grid grid-cols-2 md:grid-cols-4 gap-8 w-full">
+              <div>
+                <p class="text-[8px] uppercase tracking-widest font-black text-slate-400 mb-1">Reliability Index</p>
+                <div class="flex items-center gap-2">
+                  <span class="text-black font-black text-xl tracking-tighter">98%</span>
+                  <div class="flex-1 h-1 bg-slate-100 rounded-full">
+                    <div class="h-full bg-success opacity-80" style="width: 98%;"></div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p class="text-[8px] uppercase tracking-widest font-black text-slate-400 mb-1">Lead Time</p>
+                <p class="text-black font-black text-sm uppercase">14 Days</p>
+              </div>
+              <div>
+                <p class="text-[8px] uppercase tracking-widest font-black text-slate-400 mb-1">SLA Compliance</p>
+                <div class="flex text-success">
+                  <span class="material-symbols-outlined text-sm">star_rate</span>
+                  <span class="material-symbols-outlined text-sm">star_rate</span>
+                  <span class="material-symbols-outlined text-sm">star_rate</span>
+                  <span class="material-symbols-outlined text-sm">star_rate</span>
+                  <span class="material-symbols-outlined text-sm">star_rate</span>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <span class="bg-success text-white text-[8px] font-black px-3 py-1 rounded uppercase tracking-widest">Preferred</span>
+              </div>
+            </div>
+            <button class="p-2 border border-slate-100 rounded hover:border-black transition-all">
+              <span class="material-symbols-outlined">trending_up</span>
+            </button>
+          </div>
+
+          <!-- Card High Risk -->
+          <div class="bg-white border border-slate-200 p-6 flex flex-col lg:flex-row items-start lg:items-center gap-8 shadow-sm hover:shadow-xl transition-all cursor-pointer border-l-4 border-l-accent group">
+            <div class="flex items-center gap-4 min-w-[320px]">
+              <div class="size-14 bg-accent text-white rounded flex items-center justify-center">
+                <span class="material-symbols-outlined text-3xl">token</span>
+              </div>
+              <div>
+                <h3 class="font-black text-black text-lg uppercase tracking-tighter">Summit Textiles</h3>
+                <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Tier 2 Supplier • Ho Chi Minh, VN</p>
+              </div>
+            </div>
+            <div class="flex-1 grid grid-cols-2 md:grid-cols-4 gap-8 w-full">
+              <div>
+                <p class="text-[8px] uppercase tracking-widest font-black text-slate-400 mb-1">Reliability Index</p>
+                <div class="flex items-center gap-2">
+                  <span class="text-accent font-black text-xl tracking-tighter">72%</span>
+                  <div class="flex-1 h-1 bg-slate-100 rounded-full">
+                    <div class="h-full bg-accent opacity-80" style="width: 72%;"></div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p class="text-[8px] uppercase tracking-widest font-black text-slate-400 mb-1">Lead Time</p>
+                <div class="flex items-center gap-2">
+                  <p class="text-accent font-black text-sm uppercase">28 Days</p>
+                  <span class="text-accent text-[9px] font-black flex items-center">
+                    <span class="material-symbols-outlined text-xs">warning</span>
+                  </span>
+                </div>
+              </div>
+              <div>
+                <p class="text-[8px] uppercase tracking-widest font-black text-slate-400 mb-1">SLA Compliance</p>
+                <div class="flex text-slate-300">
+                  <span class="material-symbols-outlined text-sm text-black">star_rate</span>
+                  <span class="material-symbols-outlined text-sm text-black">star_rate</span>
+                  <span class="material-symbols-outlined text-sm">star_rate</span>
+                  <span class="material-symbols-outlined text-sm">star_rate</span>
+                  <span class="material-symbols-outlined text-sm">star_outline</span>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <span class="bg-accent/10 text-accent text-[8px] font-black px-3 py-1 rounded uppercase tracking-widest">Delinquent</span>
+              </div>
+            </div>
+            <button class="p-2 border border-slate-100 rounded hover:border-black transition-all">
+              <span class="material-symbols-outlined text-accent">notifications_active</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Load More -->
+        <div class="mt-12 flex justify-center">
+          <button class="bg-white border-2 border-black text-black px-10 py-3 rounded text-[10px] font-black uppercase tracking-[0.2em] hover:bg-black hover:text-white transition-all shadow-xl">
+            Audit More Vendors
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>

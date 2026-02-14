@@ -1,0 +1,166 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Sidebar } from '../../components/Sidebar';
+import { Header } from '../../components/Header';
+---
+
+<Layout title="Procurement Hub - ReOrder AI">
+  <div class="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark">
+    <Sidebar currentPath="/inventory/buying" />
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col overflow-y-auto">
+      <!-- Top Header -->
+      <Header />
+
+      <div class="flex-1 p-8 space-y-8 max-w-[1400px] mx-auto w-full">
+        <!-- Summary Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 border border-slate-200 shadow-sm">
+            <div class="flex justify-between items-start mb-4">
+              <p class="text-[10px] font-black uppercase tracking-widest text-slate-400">Items Pending Reorder</p>
+              <span class="material-symbols-outlined text-black">inventory_2</span>
+            </div>
+            <p class="text-3xl font-black text-black tracking-tighter">12</p>
+            <div class="mt-2 flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-success">
+              <span>+2% vs Last Week</span>
+            </div>
+          </div>
+          <div class="bg-white p-6 border border-slate-200 shadow-sm border-l-4 border-accent">
+            <div class="flex justify-between items-start mb-4">
+              <p class="text-[10px] font-black uppercase tracking-widest text-slate-400">Critical Approvals</p>
+              <span class="material-symbols-outlined text-accent">priority_high</span>
+            </div>
+            <p class="text-3xl font-black text-accent tracking-tighter">5</p>
+            <div class="mt-2 flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-accent">
+              <span>Urgent Action Required</span>
+            </div>
+          </div>
+          <div class="bg-white p-6 border border-slate-200 shadow-sm">
+            <div class="flex justify-between items-start mb-4">
+              <p class="text-[10px] font-black uppercase tracking-widest text-slate-400">Estimated Capital Req.</p>
+              <span class="material-symbols-outlined text-black">account_balance_wallet</span>
+            </div>
+            <p class="text-3xl font-black text-black tracking-tighter">$14,250</p>
+            <div class="mt-2 flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+              <span>Forecasted spend</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table Filters -->
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
+          <div class="flex items-center gap-3">
+            <button class="flex items-center gap-2 bg-white border border-slate-300 px-4 py-1.5 rounded text-[10px] font-black uppercase tracking-widest text-black hover:bg-slate-50 transition-all">
+              <span>Filter By Category</span>
+              <span class="material-symbols-outlined text-sm">expand_more</span>
+            </button>
+            <button class="flex items-center gap-2 bg-white border border-slate-300 px-4 py-1.5 rounded text-[10px] font-black uppercase tracking-widest text-black hover:bg-slate-50 transition-all">
+              <span>Supplier Status</span>
+              <span class="material-symbols-outlined text-sm">expand_more</span>
+            </button>
+          </div>
+          <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Displaying 12 High-Priority Records</p>
+        </div>
+
+        <!-- Reorder Table -->
+        <div class="bg-white border border-slate-200 shadow-xl overflow-hidden">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-black text-white text-[10px] font-black uppercase tracking-widest">
+                <th class="px-6 py-4">Product Inventory Unit</th>
+                <th class="px-6 py-4">Current Availability</th>
+                <th class="px-6 py-4">Demand Forecast</th>
+                <th class="px-6 py-4">Optimized Order</th>
+                <th class="px-6 py-4">Primary Supplier</th>
+                <th class="px-6 py-4">Risk Level</th>
+                <th class="px-6 py-4 text-right">Procurement</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <!-- Urgent Row 1 -->
+              <tr class="bg-accent/5 hover:bg-accent/10 transition-colors group">
+                <td class="px-6 py-4">
+                  <div class="font-black text-black text-sm uppercase tracking-tighter">Organic Coffee Beans</div>
+                  <div class="text-[9px] text-slate-400 font-bold tracking-widest uppercase">SKU-102-BRAZIL</div>
+                </td>
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-24 bg-slate-100 h-1 rounded-full overflow-hidden">
+                      <div class="bg-accent h-full w-[8%]"></div>
+                    </div>
+                    <span class="text-[10px] font-black text-accent uppercase">Critical</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase">450 Units</td>
+                <td class="px-6 py-4 text-[11px] font-black text-black uppercase">500 Units</td>
+                <td class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase">Santos Exports</td>
+                <td class="px-6 py-4">
+                  <span class="bg-accent text-white px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">Stockout</span>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button class="bg-black text-white px-6 py-1.5 rounded text-[9px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all shadow-md">Review</button>
+                </td>
+              </tr>
+              <!-- Normal Row -->
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="font-black text-black text-sm uppercase tracking-tighter">Oat Milk 1L</div>
+                  <div class="text-[9px] text-slate-400 font-bold tracking-widest uppercase">SKU-205-DAIRY</div>
+                </td>
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-24 bg-slate-100 h-1 rounded-full overflow-hidden">
+                      <div class="bg-black h-full w-[65%]"></div>
+                    </div>
+                    <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Normal</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase">1,200 Units</td>
+                <td class="px-6 py-4 text-[11px] font-black text-black uppercase">1,100 Units</td>
+                <td class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase">Nature's Own</td>
+                <td class="px-6 py-4">
+                  <span class="bg-slate-100 text-slate-400 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">Stable</span>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button class="border border-black text-black px-6 py-1.5 rounded text-[9px] font-black uppercase tracking-widest hover:bg-black hover:text-white transition-all">Approve</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Pagination -->
+          <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
+            <button class="text-[9px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-1 hover:text-black">
+              <span class="material-symbols-outlined text-sm">chevron_left</span> Previous
+            </button>
+            <div class="flex items-center gap-2">
+              <span class="size-6 flex items-center justify-center text-[10px] font-black bg-black text-white">1</span>
+              <span class="size-6 flex items-center justify-center text-[10px] font-black text-slate-400 hover:bg-slate-200 cursor-pointer">2</span>
+            </div>
+            <button class="text-[9px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-1 hover:text-black">
+              Next <span class="material-symbols-outlined text-sm">chevron_right</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- AI Insight -->
+        <div class="bg-black text-white p-8 flex items-center gap-8 shadow-2xl relative overflow-hidden group">
+          <div class="absolute right-0 top-0 h-full w-px bg-white/20"></div>
+          <div class="size-14 bg-white text-black rounded flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-3xl">psychology_alt</span>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-xs font-black uppercase tracking-[0.2em] text-success mb-2 flex items-center gap-2">
+              <span class="size-2 bg-success rounded-full animate-pulse"></span>
+              Live AI Intelligence
+            </h3>
+            <p class="text-lg font-bold tracking-tight leading-tight max-w-2xl">
+              Demand for <span class="text-success underline decoration-2 underline-offset-4">Organic Coffee</span> is projected to surge 15% next period. Increase safety stock to <span class="text-white bg-white/10 px-2">575 Units</span> to prevent slippage.
+            </p>
+          </div>
+          <button class="bg-white text-black px-8 py-4 text-[10px] font-black uppercase tracking-widest hover:bg-success hover:text-white transition-all shadow-xl">Deploy Rule</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>

@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+@theme {
+  /* Enterprise Color Scheme (matches reference design) */
+  --color-primary: #000000;
+  --color-primary-hover: #333333;
+  --color-secondary: #f8fafc;
+  --color-background-light: #f8fafc;
+  --color-background-dark: #0f172a;
+  --color-cream: #ffffff;
+  --color-accent: #e11d48;
+  --color-success: #16a34a;
+  --color-risk-red: #e11d48;
+  /* Reference design custom slate & accents */
+  --color-slate-custom-200: #e2e8f0;
+  --color-slate-custom-500: #64748b;
+  --color-slate-custom-600: #475569;
+  --color-accent-green: #22c55e;
+  --color-accent-red: #ef4444;
+  --font-display: "Inter", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply font-display bg-secondary text-[#131616] dark:text-white antialiased;
+  }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.active-nav {
+  @apply bg-primary/10 border-r-3 border-primary;
+}
+
+/* Custom Scrollbar using theme colors */
+.overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}

@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Sidebar } from '../../components/Sidebar';
+import { Header } from '../../components/Header';
+import { KPICards } from '../../components/KPICards';
+import { ActionCard } from '../../components/ActionCard';
+import { TrendChart } from '../../components/TrendChart';
+import { RiskAlerts, HealthScore } from '../../components/RiskAlerts';
+const currentPath = '/dashboard';
+---
+
+<Layout title="Executive Overview - ReOrder AI">
+  <div class="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark">
+    <Sidebar currentPath={currentPath} />
+    <main class="flex-1 flex flex-col overflow-y-auto">
+      <Header />
+      <div class="p-10 flex flex-col lg:flex-row gap-10 max-w-[1600px] mx-auto w-full">
+        <div class="flex-1 space-y-10">
+          <KPICards client:load />
+          <div class="grid grid-cols-1 xl:grid-cols-2 gap-10">
+            <ActionCard client:load />
+            <TrendChart client:load />
+          </div>
+        </div>
+        <aside class="w-full lg:w-96 flex flex-col gap-8">
+          <RiskAlerts client:load />
+          <HealthScore client:load />
+        </aside>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<style is:global>
+  .overflow-y-auto {
+    scrollbar-width: thin;
+    scrollbar-color: #000000 transparent;
+  }
+  ::selection {
+    background: #000000;
+    color: #ffffff;
+  }
+</style>

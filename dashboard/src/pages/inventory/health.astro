@@ -1,0 +1,164 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Sidebar } from '../../components/Sidebar';
+import { Header } from '../../components/Header';
+---
+
+<Layout title="Inventory Performance - ReOrder AI">
+  <div class="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark">
+    <Sidebar currentPath="/inventory/health" />
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col overflow-y-auto">
+      <!-- Top Header -->
+      <Header />
+
+      <div class="flex-1 px-10 py-8 max-w-[1400px] mx-auto w-full">
+        <!-- Header Section -->
+        <div class="flex flex-wrap justify-between items-end gap-4 mb-8 border-b border-slate-100 pb-6">
+          <div class="flex flex-col gap-2">
+            <h1 class="text-black text-4xl font-black leading-tight tracking-tighter uppercase">Inventory Performance</h1>
+            <p class="text-slate-500 text-sm font-bold uppercase tracking-widest">Asset Management & Risk Mitigation</p>
+          </div>
+          <div class="flex gap-3">
+            <button class="flex items-center justify-center rounded bg-black text-white px-6 h-11 text-[10px] font-black uppercase tracking-widest shadow-xl hover:bg-slate-800 transition-all">
+              <span class="material-symbols-outlined mr-2 text-[18px]">bolt</span>
+              Run AI Optimization
+            </button>
+            <button class="flex items-center justify-center rounded bg-white border border-slate-300 text-black px-6 h-11 text-[10px] font-black uppercase tracking-widest hover:bg-slate-50 transition-all">
+              <span class="material-symbols-outlined mr-2 text-[18px]">file_download</span>
+              Export PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Global Health Progress Bar -->
+        <div class="bg-white rounded p-8 border border-slate-200 mb-10 shadow-sm relative">
+          <div class="flex flex-col gap-5">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-3">
+                <span class="text-black font-black text-xs uppercase tracking-widest">Portfolio Stability</span>
+                <span class="px-2 py-0.5 bg-success text-white text-[9px] font-black rounded uppercase">Target Met</span>
+              </div>
+              <div class="flex gap-6">
+                <div class="flex items-center gap-2">
+                  <div class="size-2 rounded-full bg-success"></div>
+                  <span class="text-[10px] font-black text-slate-500 uppercase">74% Healthy Assets</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="size-2 rounded-full bg-accent"></div>
+                  <span class="text-[10px] font-black text-slate-500 uppercase">26% Liquidity Risk</span>
+                </div>
+              </div>
+            </div>
+            <div class="relative w-full h-2 bg-slate-100 rounded-full overflow-hidden flex">
+              <div class="h-full bg-success opacity-80" style="width: 74%;"></div>
+              <div class="h-full bg-accent opacity-80" style="width: 26%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Snapshot Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div class="bg-white p-6 border border-slate-200 shadow-sm">
+            <p class="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-1">Active SKUs</p>
+            <div class="flex items-baseline gap-2">
+              <p class="text-3xl font-black text-black tracking-tighter">2,482</p>
+              <span class="text-[10px] font-bold text-success">+4%</span>
+            </div>
+          </div>
+          <div class="bg-white p-6 border border-slate-200 shadow-sm">
+            <p class="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-1">Turnover Rate</p>
+            <div class="flex items-baseline gap-2">
+              <p class="text-3xl font-black text-black tracking-tighter">12.4x</p>
+              <span class="text-[10px] font-bold text-success">OPTIMAL</span>
+            </div>
+          </div>
+          <div class="bg-white p-6 border border-slate-200 shadow-sm border-l-4 border-accent">
+            <p class="text-accent text-[9px] font-black uppercase tracking-widest mb-1">Total Risk Value</p>
+            <div class="flex items-baseline gap-2">
+              <p class="text-3xl font-black text-accent tracking-tighter">$142k</p>
+              <span class="material-symbols-outlined text-accent text-sm">trending_up</span>
+            </div>
+          </div>
+          <div class="bg-white p-6 border border-slate-200 shadow-sm">
+            <p class="text-slate-400 text-[9px] font-black uppercase tracking-widest mb-1">Auto-Supply</p>
+            <div class="flex items-baseline gap-2">
+              <p class="text-3xl font-black text-black tracking-tighter">1.1k</p>
+              <span class="text-[10px] font-bold text-success">ACTIVE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inventory Breakdown -->
+        <div class="flex items-center justify-between mb-8 border-b border-slate-100 pb-4">
+          <h3 class="text-lg font-black text-black uppercase tracking-tighter">Asset Breakdown</h3>
+          <div class="flex gap-2">
+            <button class="px-4 py-1.5 text-[10px] font-black bg-black text-white uppercase tracking-widest">All</button>
+            <button class="px-4 py-1.5 text-[10px] font-black bg-white border border-slate-200 text-slate-400 uppercase tracking-widest">Risk Only</button>
+          </div>
+        </div>
+
+        <!-- Inventory Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Card High Risk -->
+          <div class="bg-white border border-slate-200 shadow-md group">
+            <div class="h-1 bg-accent w-full"></div>
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-6">
+                <div>
+                  <h4 class="text-lg font-black text-black uppercase tracking-tighter">Industrial Fan X</h4>
+                  <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">INF-9920-B</p>
+                </div>
+                <p class="text-xl font-black text-accent">$8,400</p>
+              </div>
+              <div class="flex gap-4 mb-6">
+                <div class="flex-1 bg-slate-50 p-4 border border-slate-100">
+                  <p class="text-[8px] font-black text-slate-400 uppercase mb-1">Stock</p>
+                  <p class="font-bold text-black text-lg">142</p>
+                </div>
+                <div class="flex-1 bg-slate-50 p-4 border border-slate-100">
+                  <p class="text-[8px] font-black text-slate-400 uppercase mb-1">Velocity</p>
+                  <p class="font-bold text-accent text-lg">0.2x</p>
+                </div>
+              </div>
+              <div class="bg-accent/5 p-3 text-[10px] font-bold text-accent uppercase tracking-widest mb-6 flex gap-2">
+                <span class="material-symbols-outlined text-sm">info</span>
+                AI Suggests liquidation move
+              </div>
+              <button class="w-full py-3 bg-black text-white text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all">Execute Clearance</button>
+            </div>
+          </div>
+
+          <!-- Card Healthy -->
+          <div class="bg-white border border-slate-200 shadow-md group">
+            <div class="h-1 bg-success w-full text-white"></div>
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-6">
+                <div>
+                  <h4 class="text-lg font-black text-black uppercase tracking-tighter">Bearing Kit V2</h4>
+                  <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">PBK-552-MK</p>
+                </div>
+                <p class="text-xl font-black text-black tracking-tighter">1.2k U.</p>
+              </div>
+              <div class="flex gap-4 mb-6">
+                <div class="flex-1 bg-slate-50 p-4 border border-slate-100">
+                  <p class="text-[8px] font-black text-slate-400 uppercase mb-1">Turnover</p>
+                  <p class="font-bold text-success text-lg">18.5x</p>
+                </div>
+                <div class="flex-1 bg-slate-50 p-4 border border-slate-100">
+                  <p class="text-[8px] font-black text-slate-400 uppercase mb-1">Status</p>
+                  <p class="font-bold text-success text-lg uppercase">Strong</p>
+                </div>
+              </div>
+              <div class="bg-success text-white p-3 text-[10px] font-black uppercase tracking-widest flex items-center justify-between">
+                <span>Auto-Reorder Online</span>
+                <span class="material-symbols-outlined text-sm">shield_check</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>

@@ -1,78 +1,396 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const features = [
-	{ icon: '💰', title: 'What is about to run out?', desc: 'Automated reorder points based on real-time seasonality and lead times.' },
-	{ icon: '📦', title: 'How much should I buy?', desc: 'Economic Order Quantity (EOQ) calculations to maximize cash flow efficiency.' },
-	{ icon: '🔥', title: 'What is burning my cash?', desc: 'Dead Stock Alerts identify items that haven\'t sold in 60+ days.' }
-];
 ---
 
-<Layout title="ReOrder AI | Inventory Optimization">
-	<main class="max-w-7xl mx-auto px-6 py-12">
-		<div class="glass-panel p-8 md:p-12 rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-2xl shadow-2xl">
-			<header class="flex justify-between items-center mb-16">
-				<div class="flex items-center gap-3 text-2xl font-extrabold">
-					<span>📈</span>
-					<span>ReOrder <span class="text-purple-500 drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]">AI</span></span>
-				</div>
-				<nav class="hidden md:flex gap-8 items-center text-white/60 font-medium">
-					<a href="#features" class="hover:text-white transition-colors">Features</a>
-					<a href="#insights" class="hover:text-white transition-colors">Insights</a>
-					<button class="bg-purple-600 text-white px-6 py-2.5 rounded-xl font-bold shadow-lg shadow-purple-500/20 hover:scale-105 transition-transform">Connect Store</button>
-				</nav>
-			</header>
+<Layout title="ReOrder AI — Smarter inventory. Fewer stockouts. More profit.">
+  <div class="bg-background-light text-slate-900 font-display antialiased selection:bg-black selection:text-white min-h-screen">
+    <!-- 1. Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-white border-b border-slate-custom-200 w-full">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-20 items-center">
+          <div class="flex items-center">
+            <a class="flex-shrink-0 flex items-center gap-2" href="/">
+              <div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+                <span class="material-symbols-outlined text-white text-lg">analytics</span>
+              </div>
+              <span class="font-bold text-xl tracking-tight text-primary">ReOrder AI</span>
+            </a>
+          </div>
+          <div class="hidden md:flex space-x-8">
+            <a class="text-sm font-medium text-slate-custom-600 hover:text-primary transition-colors" href="#features">Solutions</a>
+            <a class="text-sm font-medium text-slate-custom-600 hover:text-primary transition-colors" href="#how-it-works">Platform</a>
+            <a class="text-sm font-medium text-slate-custom-600 hover:text-primary transition-colors" href="#trust">Resources</a>
+            <a class="text-sm font-medium text-slate-custom-600 hover:text-primary transition-colors" href="#ctas">Company</a>
+          </div>
+          <div class="flex items-center">
+            <a class="ml-4 inline-flex items-center justify-center px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-hover transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" href="/login">
+              Request Demo
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
 
-			<div class="grid lg:grid-cols-2 gap-16 items-center mb-24">
-				<div>
-					<span class="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/50 text-purple-400 text-sm font-bold mb-6">
-						A 2026 SaaS Paradigm
-					</span>
-					<h1 class="text-6xl md:text-7xl font-extrabold leading-[1.1] mb-8">
-						Predict the <span class="bg-gradient-to-r from-purple-500 to-cyan-400 bg-clip-text text-transparent">Future</span> of Your Inventory
-					</h1>
-					<p class="text-xl text-white/60 leading-relaxed mb-10 max-w-xl">
-						Stop guessing. Use AI to bridge the gap between "data" and "decision". Directly impact your bank account by optimizing every SKU.
-					</p>
-					<div class="flex flex-wrap gap-4">
-						<button class="bg-white text-black px-10 py-4 rounded-2xl font-extrabold text-lg hover:scale-105 transition-transform">Get Free Audit</button>
-						<button class="bg-white/5 border border-white/10 px-10 py-4 rounded-2xl font-extrabold text-lg hover:bg-white/10 transition-colors">View Demo</button>
-					</div>
-				</div>
+    <!-- 2. Hero Section -->
+    <section class="relative pt-16 pb-24 lg:pt-32 lg:pb-32 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+          <div class="lg:col-span-5 text-center lg:text-left mb-12 lg:mb-0">
+            <div class="inline-flex items-center px-3 py-1 rounded-full border border-slate-custom-200 bg-white mb-6">
+              <span class="flex h-2 w-2 rounded-full bg-accent-green mr-2"></span>
+              <span class="text-xs font-medium text-slate-custom-600 uppercase tracking-wide">New: Supply Stream v2.0</span>
+            </div>
+            <h1 class="text-4xl lg:text-6xl font-bold tracking-tight text-primary mb-6 leading-tight">
+              Optimize Supply Chain ROI with <span class="text-slate-custom-500">Autonomous AI</span>
+            </h1>
+            <p class="text-lg text-slate-custom-600 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              Predict demand, automate reordering, and reduce stockouts by 30% with our enterprise-grade intelligence engine for Shopify and WooCommerce.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a class="inline-flex justify-center items-center px-8 py-3.5 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary-hover md:text-lg transition-all shadow-sm" href="/login">
+                Get Started
+              </a>
+              <a class="inline-flex justify-center items-center px-8 py-3.5 border border-slate-300 text-base font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50 md:text-lg transition-all" href="#how-it-works">
+                <span class="material-symbols-outlined text-lg mr-2">play_arrow</span> Watch Demo
+              </a>
+            </div>
+            <p class="mt-4 text-sm text-slate-custom-500">
+              Enterprise-ready security. SOC2 Type II Certified.
+            </p>
+          </div>
+          <!-- Dashboard Mockup -->
+          <div class="lg:col-span-7 relative">
+            <div class="relative rounded-xl bg-white border border-slate-custom-200 shadow-2xl overflow-hidden transform transition-transform hover:scale-[1.01] duration-500">
+              <div class="bg-slate-50 border-b border-slate-custom-200 px-4 py-3 flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-slate-300"></div>
+                <div class="w-3 h-3 rounded-full bg-slate-300"></div>
+                <div class="w-3 h-3 rounded-full bg-slate-300"></div>
+                <div class="ml-auto text-xs text-slate-400 font-mono">dashboard.reorderai.com</div>
+              </div>
+              <div class="p-6 grid grid-cols-3 gap-6">
+                <div class="col-span-1 bg-slate-50 p-4 rounded-lg border border-slate-100">
+                  <p class="text-xs text-slate-500 font-medium uppercase mb-1">Total Savings</p>
+                  <div class="flex items-baseline gap-2">
+                    <h3 class="text-2xl font-bold text-primary">$2.4M</h3>
+                    <span class="text-xs font-bold text-accent-green flex items-center bg-green-50 px-1.5 py-0.5 rounded">
+                      <span class="material-symbols-outlined text-[10px] mr-0.5">arrow_upward</span> 12%
+                    </span>
+                  </div>
+                </div>
+                <div class="col-span-1 bg-slate-50 p-4 rounded-lg border border-slate-100">
+                  <p class="text-xs text-slate-500 font-medium uppercase mb-1">In-Stock Rate</p>
+                  <div class="flex items-baseline gap-2">
+                    <h3 class="text-2xl font-bold text-primary">94.8%</h3>
+                    <span class="text-xs font-bold text-accent-green flex items-center bg-green-50 px-1.5 py-0.5 rounded">
+                      <span class="material-symbols-outlined text-[10px] mr-0.5">arrow_upward</span> 4.2%
+                    </span>
+                  </div>
+                </div>
+                <div class="col-span-1 bg-slate-50 p-4 rounded-lg border border-slate-100">
+                  <p class="text-xs text-slate-500 font-medium uppercase mb-1">Risk Alerts</p>
+                  <div class="flex items-baseline gap-2">
+                    <h3 class="text-2xl font-bold text-primary">3</h3>
+                    <span class="text-xs font-bold text-accent-red flex items-center bg-red-50 px-1.5 py-0.5 rounded">
+                      <span class="material-symbols-outlined text-[10px] mr-0.5">warning</span> Critical
+                    </span>
+                  </div>
+                </div>
+                <div class="col-span-3 bg-white border border-slate-100 rounded-lg p-5 mt-2 h-48 relative overflow-hidden">
+                  <div class="flex justify-between items-center mb-4">
+                    <h4 class="text-sm font-semibold text-slate-700">Predictive Inventory Flow</h4>
+                    <div class="flex gap-2">
+                      <span class="h-2 w-2 rounded-full bg-primary"></span>
+                      <span class="h-2 w-2 rounded-full bg-slate-200"></span>
+                    </div>
+                  </div>
+                  <div class="w-full h-32 flex items-end justify-between gap-2 px-2">
+                    <div class="w-full bg-slate-100 rounded-t-sm h-[40%]"></div>
+                    <div class="w-full bg-slate-100 rounded-t-sm h-[60%]"></div>
+                    <div class="w-full bg-primary/80 rounded-t-sm h-[50%]"></div>
+                    <div class="w-full bg-primary/90 rounded-t-sm h-[75%]"></div>
+                    <div class="w-full bg-primary rounded-t-sm h-[90%]"></div>
+                    <div class="w-full bg-slate-100 rounded-t-sm h-[65%]"></div>
+                    <div class="w-full bg-slate-100 rounded-t-sm h-[55%]"></div>
+                    <div class="w-full bg-slate-100 rounded-t-sm h-[45%]"></div>
+                  </div>
+                  <div class="absolute inset-0 pointer-events-none opacity-10 top-[60px]" style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 20px 20px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="absolute -top-10 -right-10 w-64 h-64 bg-slate-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 -z-10"></div>
+            <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-slate-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 -z-10"></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-				<div class="relative">
-					<div class="bg-white/5 border border-white/10 rounded-3xl p-8 shadow-inner overflow-hidden">
-						<div class="flex justify-between items-center mb-8">
-							<h3 class="text-xl font-bold">Inventory Health</h3>
-							<span class="text-emerald-400 text-sm font-bold">+12% vs last month</span>
-						</div>
-						<div class="space-y-4">
-							<div class="p-5 rounded-2xl bg-black/40 border-l-4 border-red-500">
-								<span class="text-sm text-white/40 block mb-1">Ready to Reorder</span>
-								<span class="text-3xl font-black">38 items</span>
-							</div>
-							<div class="p-5 rounded-2xl bg-black/40 border-l-4 border-amber-500">
-								<span class="text-sm text-white/40 block mb-1">Dead Stock</span>
-								<span class="text-3xl font-black">15 items</span>
-							</div>
-							<div class="p-5 rounded-2xl bg-black/40 border-l-4 border-emerald-500">
-								<span class="text-sm text-white/40 block mb-1">Healthy</span>
-								<span class="text-3xl font-black">212 items</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+    <!-- 4. Features Grid -->
+    <section id="features" class="py-24 bg-background-light">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-3xl font-bold text-primary mb-4">Enterprise-Grade Intelligence</h2>
+          <p class="text-lg text-slate-custom-600">Our platform integrates seamlessly with Shopify and WooCommerce to deliver actionable reorder insights immediately.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white p-8 rounded-lg border border-slate-custom-200 hover:shadow-lg transition-shadow duration-300">
+            <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-6">
+              <span class="material-symbols-outlined text-accent-red">radar</span>
+            </div>
+            <h3 class="text-xl font-bold text-primary mb-3">Real-time Risk Detection</h3>
+            <p class="text-slate-custom-600 leading-relaxed">
+              Identify stockout and dead-stock risks before they impact sales. Our AI scans demand and inventory levels instantly.
+            </p>
+          </div>
+          <div class="bg-white p-8 rounded-lg border border-slate-custom-200 hover:shadow-lg transition-shadow duration-300">
+            <div class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center mb-6">
+              <span class="material-symbols-outlined text-accent-green">trending_down</span>
+            </div>
+            <h3 class="text-xl font-bold text-primary mb-3">Cost Optimization</h3>
+            <p class="text-slate-custom-600 leading-relaxed">
+              AI-suggested order quantities and reorder points reduce excess inventory and working capital by up to 30%.
+            </p>
+          </div>
+          <div class="bg-white p-8 rounded-lg border border-slate-custom-200 hover:shadow-lg transition-shadow duration-300">
+            <div class="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center mb-6">
+              <span class="material-symbols-outlined text-primary">hub</span>
+            </div>
+            <h3 class="text-xl font-bold text-primary mb-3">Seamless Integration</h3>
+            <p class="text-slate-custom-600 leading-relaxed">
+              Plug-and-play with Shopify and WooCommerce. Sync inventory and sales in minutes—no lengthy implementation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-			<div class="grid md:grid-cols-3 gap-8" id="features">
-				{features.map((feature) => (
-					<div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-colors group">
-						<div class="text-4xl mb-6 group-hover:scale-110 transition-transform inline-block">{feature.icon}</div>
-						<h3 class="text-xl font-bold mb-3">{feature.title}</h3>
-						<p class="text-white/50 leading-relaxed">{feature.desc}</p>
-					</div>
-				))}
-			</div>
-		</div>
-	</main>
+    <!-- 5. How It Works -->
+    <section id="how-it-works" class="py-24 bg-white border-y border-slate-custom-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold text-primary">Deployment in Weeks, Not Months</h2>
+        </div>
+        <div class="relative">
+          <div class="hidden md:block absolute top-1/2 left-0 w-full h-px bg-slate-custom-200 -translate-y-1/2 z-0"></div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+            <div class="flex flex-col items-center text-center bg-white p-4">
+              <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg mb-6 shadow-xl ring-8 ring-white">1</div>
+              <h4 class="text-lg font-bold text-primary mb-2">Connect Data</h4>
+              <p class="text-slate-custom-600 max-w-xs">Securely link your Shopify or WooCommerce store and historical sales via our API.</p>
+            </div>
+            <div class="flex flex-col items-center text-center bg-white p-4">
+              <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg mb-6 shadow-xl ring-8 ring-white">2</div>
+              <h4 class="text-lg font-bold text-primary mb-2">AI Analysis</h4>
+              <p class="text-slate-custom-600 max-w-xs">Our models train on your demand patterns and supply chain dynamics in 7–14 days.</p>
+            </div>
+            <div class="flex flex-col items-center text-center bg-white p-4">
+              <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg mb-6 shadow-xl ring-8 ring-white">3</div>
+              <h4 class="text-lg font-bold text-primary mb-2">Execute Strategy</h4>
+              <p class="text-slate-custom-600 max-w-xs">Receive reorder recommendations and optimize inventory flows from one dashboard.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Trust & Credibility -->
+    <section id="trust" class="py-16 bg-background-light">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-xl border border-slate-custom-200 p-8 md:p-12">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-center justify-items-center">
+            <div class="flex items-center gap-3">
+              <div class="bg-green-100 p-1 rounded-full">
+                <span class="material-symbols-outlined text-accent-green text-sm font-bold">check</span>
+              </div>
+              <span class="font-semibold text-primary">SOC2 Type II</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="bg-green-100 p-1 rounded-full">
+                <span class="material-symbols-outlined text-accent-green text-sm font-bold">check</span>
+              </div>
+              <span class="font-semibold text-primary">GDPR Compliant</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="bg-green-100 p-1 rounded-full">
+                <span class="material-symbols-outlined text-accent-green text-sm font-bold">check</span>
+              </div>
+              <span class="font-semibold text-primary">ISO 27001</span>
+            </div>
+            <div class="text-center border-l border-slate-200 pl-8 hidden lg:block">
+              <p class="text-2xl font-bold text-primary">99.9%</p>
+              <p class="text-xs text-slate-500 uppercase tracking-wide">Uptime SLA</p>
+            </div>
+            <div class="text-center lg:hidden flex flex-col items-center col-span-2 md:col-span-1">
+              <p class="text-2xl font-bold text-primary">99.9%</p>
+              <p class="text-xs text-slate-500 uppercase tracking-wide">Uptime SLA</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Testimonials -->
+    <section class="py-24 bg-background-light">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white p-8 rounded-lg border border-slate-custom-200 relative">
+            <span class="material-symbols-outlined text-slate-100 text-6xl absolute top-6 left-6 -z-0">format_quote</span>
+            <div class="relative z-10">
+              <p class="text-lg text-primary font-medium mb-6">"ReOrder AI reduced our inventory holding costs by 22% within the first quarter. The ROI was almost immediate for our executive team."</p>
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-slate-200 rounded-full flex items-center justify-center text-slate-600 font-bold text-sm">JM</div>
+                <div>
+                  <h5 class="font-bold text-primary text-sm">John Smith</h5>
+                  <p class="text-slate-custom-500 text-sm">COO, Global Logistics Inc.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white p-8 rounded-lg border border-slate-custom-200 relative">
+            <span class="material-symbols-outlined text-slate-100 text-6xl absolute top-6 left-6 -z-0">format_quote</span>
+            <div class="relative z-10">
+              <p class="text-lg text-primary font-medium mb-6">"The autonomous risk detection saved us from a major stockout last winter. It's the most reliable tool in our tech stack."</p>
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-slate-200 rounded-full flex items-center justify-center text-slate-600 font-bold text-sm">EW</div>
+                <div>
+                  <h5 class="font-bold text-primary text-sm">Elena Williams</h5>
+                  <p class="text-slate-custom-500 text-sm">VP Supply Chain, TechFlow</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Pricing Section -->
+    <section id="pricing" class="py-24 bg-background-light">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
+        <div class="max-w-lg w-full bg-primary rounded-xl shadow-2xl overflow-hidden transform transition-all hover:-translate-y-1 duration-300">
+          <div class="p-10 text-center border-b border-gray-800">
+            <h3 class="text-white text-xl font-medium mb-2">Enterprise Standard</h3>
+            <div class="flex items-center justify-center gap-1 mb-4">
+              <span class="text-4xl font-bold text-white">$99</span>
+              <span class="text-gray-400 text-lg">/mo</span>
+            </div>
+            <p class="text-gray-400 text-sm">Per user. All features included.</p>
+          </div>
+          <div class="p-10 bg-black">
+            <ul class="space-y-4 mb-8">
+              <li class="flex items-start">
+                <span class="material-symbols-outlined text-accent-green text-lg mr-3 mt-0.5">check_circle</span>
+                <span class="text-gray-300 text-sm">Reorder-point & stockout alerts</span>
+              </li>
+              <li class="flex items-start">
+                <span class="material-symbols-outlined text-accent-green text-lg mr-3 mt-0.5">check_circle</span>
+                <span class="text-gray-300 text-sm">AI demand forecasts (30/60/90 days)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="material-symbols-outlined text-accent-green text-lg mr-3 mt-0.5">check_circle</span>
+                <span class="text-gray-300 text-sm">Suggested order quantities</span>
+              </li>
+              <li class="flex items-start">
+                <span class="material-symbols-outlined text-accent-green text-lg mr-3 mt-0.5">check_circle</span>
+                <span class="text-gray-300 text-sm">Dead-stock alerts</span>
+              </li>
+              <li class="flex items-start">
+                <span class="material-symbols-outlined text-accent-green text-lg mr-3 mt-0.5">check_circle</span>
+                <span class="text-gray-300 text-sm">Shopify & WooCommerce sync</span>
+              </li>
+              <li class="flex items-start">
+                <span class="material-symbols-outlined text-accent-green text-lg mr-3 mt-0.5">check_circle</span>
+                <span class="text-gray-300 text-sm">Full dashboard & inventory management</span>
+              </li>
+              <li class="flex items-start">
+                <span class="material-symbols-outlined text-accent-green text-lg mr-3 mt-0.5">check_circle</span>
+                <span class="text-gray-300 text-sm">Analytics, simulator & supplier view</span>
+              </li>
+              <li class="flex items-start">
+                <span class="material-symbols-outlined text-accent-green text-lg mr-3 mt-0.5">check_circle</span>
+                <span class="text-gray-300 text-sm">99.9% uptime SLA</span>
+              </li>
+            </ul>
+            <a class="block w-full py-4 px-6 bg-white hover:bg-gray-100 text-primary font-bold text-center rounded-lg transition-colors" href="/login">
+              Get Started
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Final CTA Banner -->
+    <section id="ctas" class="bg-white border-t border-slate-custom-200 py-20">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">Ready to optimize your operations?</h2>
+        <p class="text-lg text-slate-custom-600 mb-10 max-w-2xl mx-auto">Join 500+ enterprise leaders using ReOrder AI to drive efficiency and reduce stockouts today.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a class="inline-flex justify-center items-center px-8 py-4 border border-transparent text-base font-bold rounded-md text-white bg-primary hover:bg-primary-hover md:text-lg transition-all shadow-lg hover:shadow-xl" href="/login">
+            Get Started Now
+          </a>
+          <a class="inline-flex justify-center items-center px-8 py-4 border border-slate-300 text-base font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50 md:text-lg transition-all" href="mailto:sales@reorderai.com">
+            Contact Sales
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Footer -->
+    <footer class="bg-white border-t border-slate-custom-200 pt-16 pb-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+          <div class="col-span-2 lg:col-span-2 pr-8">
+            <a class="flex items-center gap-2 mb-4" href="/">
+              <div class="w-6 h-6 bg-primary rounded flex items-center justify-center">
+                <span class="material-symbols-outlined text-white text-xs">analytics</span>
+              </div>
+              <span class="font-bold text-lg text-primary">ReOrder AI</span>
+            </a>
+            <p class="text-slate-custom-500 text-sm leading-relaxed mb-6 max-w-xs">
+              The leading autonomous supply chain intelligence platform for Shopify and WooCommerce. Built for scale, security, and speed.
+            </p>
+            <div class="flex space-x-4">
+              <a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="sr-only">LinkedIn</span><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg></a>
+              <a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="sr-only">Twitter</span><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg></a>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-primary tracking-wider uppercase mb-4">Product</h3>
+            <ul class="space-y-3">
+              <li><a class="text-sm text-slate-custom-600 hover:text-primary transition-colors" href="#features">Features</a></li>
+              <li><a class="text-sm text-slate-custom-600 hover:text-primary transition-colors" href="#pricing">Pricing</a></li>
+              <li><a class="text-sm text-slate-custom-600 hover:text-primary transition-colors" href="/dashboard">Dashboard</a></li>
+              <li><a class="text-sm text-slate-custom-600 hover:text-primary transition-colors" href="#how-it-works">Integrations</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-primary tracking-wider uppercase mb-4">Company</h3>
+            <ul class="space-y-3">
+              <li><a class="text-sm text-slate-custom-600 hover:text-primary transition-colors" href="#trust">About</a></li>
+              <li><a class="text-sm text-slate-custom-600 hover:text-primary transition-colors" href="#">Careers</a></li>
+              <li><a class="text-sm text-slate-custom-600 hover:text-primary transition-colors" href="#">Blog</a></li>
+              <li><a class="text-sm text-slate-custom-600 hover:text-primary transition-colors" href="#ctas">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-primary tracking-wider uppercase mb-4">Legal</h3>
+            <ul class="space-y-3">
+              <li><a class="text-sm text-slate-custom-600 hover:text-primary transition-colors" href="#">Privacy</a></li>
+              <li><a class="text-sm text-slate-custom-600 hover:text-primary transition-colors" href="#">Terms</a></li>
+              <li><a class="text-sm text-slate-custom-600 hover:text-primary transition-colors" href="#">Security</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-slate-custom-200 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p class="text-sm text-slate-400">© 2025 ReOrder AI. All rights reserved.</p>
+          <div class="flex items-center gap-2 mt-4 md:mt-0">
+            <span class="w-2 h-2 bg-accent-green rounded-full"></span>
+            <span class="text-xs text-slate-500 font-medium">Systems Operational</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
 </Layout>
+
+<style is:global>
+  .selection\:bg-black ::selection { background: #000; color: #fff; }
+</style>

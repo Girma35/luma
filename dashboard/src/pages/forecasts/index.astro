@@ -1,0 +1,169 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Sidebar } from '../../components/Sidebar';
+import { Header } from '../../components/Header';
+---
+
+<Layout title="Predictive Forecasting - ReOrder AI">
+  <div class="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark">
+    <Sidebar currentPath="/forecasts" />
+
+    <!-- SKU Filter Sidebar -->
+    <aside class="w-72 border-r border-slate-200 bg-white flex flex-col shrink-0">
+      <div class="p-6 border-b border-slate-100">
+        <h2 class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">Portfolio Context</h2>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+          <input
+            class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded text-[11px] font-bold uppercase tracking-widest focus:ring-1 focus:ring-black outline-none transition-all"
+            placeholder="Search System ID..."
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="flex-1 overflow-y-auto p-4 space-y-6">
+        <div>
+          <p class="text-[9px] uppercase tracking-widest font-black text-black mb-3 px-2">Industrial Components</p>
+          <div class="space-y-1">
+            <label class="flex items-center gap-3 p-3 hover:bg-slate-50 rounded cursor-pointer group transition-all">
+              <input checked class="rounded border-slate-300 text-black focus:ring-black size-4" type="checkbox" />
+              <div class="flex flex-col">
+                <span class="text-[11px] font-black text-black uppercase tracking-tighter">SKU-8821: Smart Hub</span>
+                <span class="text-[8px] font-bold text-slate-400 uppercase">Current: 440 Units</span>
+              </div>
+            </label>
+            <label class="flex items-center gap-3 p-3 hover:bg-slate-50 rounded cursor-pointer group transition-all">
+              <input class="rounded border-slate-300 text-black focus:ring-black size-4" type="checkbox" />
+              <div class="flex flex-col">
+                <span class="text-[11px] font-black text-slate-500 uppercase tracking-tighter group-hover:text-black">SKU-8845: Sound Unit</span>
+                <span class="text-[8px] font-bold text-slate-400 uppercase">Current: 120 Units</span>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="p-6 border-t border-slate-100 bg-slate-50">
+        <button class="w-full bg-black text-white py-3 rounded text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all flex items-center justify-center gap-2 shadow-xl">
+          <span class="material-symbols-outlined text-[18px]">sync_alt</span>
+          Recalculate Model
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col overflow-hidden">
+      <!-- Top Header -->
+      <Header />
+
+      <!-- Scrollable Content -->
+      <div class="flex-1 overflow-y-auto p-10 space-y-10 max-w-[1200px] mx-auto w-full">
+        <!-- Summary Stats -->
+        <div class="grid grid-cols-4 gap-6">
+          <div class="bg-white p-6 border border-slate-200 shadow-sm relative overflow-hidden group">
+            <div class="absolute left-0 top-0 h-full w-1 bg-black"></div>
+            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Stock Stability</p>
+            <h3 class="text-3xl font-black text-black tracking-tighter">84.2%</h3>
+            <div class="mt-2 flex items-center gap-1 text-[10px] font-black text-success uppercase">
+              <span class="material-symbols-outlined text-[14px]">trending_up</span>
+              <span>Improvement</span>
+            </div>
+          </div>
+          <div class="bg-white p-6 border border-slate-200 shadow-sm border-l-4 border-l-accent">
+            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Projected Shortfalls</p>
+            <h3 class="text-3xl font-black text-accent tracking-tighter">12 SKUs</h3>
+            <div class="mt-2 flex items-center gap-1 text-[10px] font-black text-accent uppercase">
+              <span class="material-symbols-outlined text-[14px]">warning</span>
+              <span>Action High</span>
+            </div>
+          </div>
+          <div class="bg-white p-6 border border-slate-200 shadow-sm">
+            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Optimized Order Pt</p>
+            <h3 class="text-2xl font-black text-black uppercase tracking-tighter">OCT 24</h3>
+            <div class="mt-2 flex items-center gap-1 text-[10px] font-black text-slate-400 uppercase">
+              <span class="material-symbols-outlined text-[14px]">event</span>
+              <span>Next Run</span>
+            </div>
+          </div>
+          <div class="bg-white p-6 border border-slate-200 shadow-sm">
+            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Projected Thruput</p>
+            <h3 class="text-3xl font-black text-black tracking-tighter">4.8k</h3>
+            <div class="mt-2 flex items-center gap-1 text-[10px] font-black text-slate-400 uppercase">
+              <span class="material-symbols-outlined text-[14px]">bar_chart</span>
+              <span>Q4 Estimates</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Chart Card -->
+        <div class="bg-white p-10 border border-slate-200 shadow-2xl relative min-h-[500px] flex flex-col">
+          <div class="flex items-start justify-between mb-12">
+            <div>
+              <h3 class="text-xl font-black uppercase tracking-tighter text-black">Inventory Velocity Projection</h3>
+              <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Timeline Baseline: Oct 2023 - Jan 2024</p>
+            </div>
+            <div class="flex items-center gap-6">
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-1 bg-black"></div>
+                <span class="text-[10px] font-black text-black uppercase tracking-widest">Model Forecast</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-1 bg-accent"></div>
+                <span class="text-[10px] font-black text-black uppercase tracking-widest">Risk Variance</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Chart Visualization -->
+          <div class="flex-1 flex flex-col relative pt-10">
+            <!-- Y-Axis Labels -->
+            <div class="absolute left-0 top-10 h-full flex flex-col justify-between text-[10px] font-black text-slate-300 -translate-x-12">
+              <span>1000</span><span>750</span><span>500</span><span>250</span><span>0</span>
+            </div>
+            <!-- Grid Lines & Chart -->
+            <div class="flex-1 flex flex-col justify-between border-l-2 border-b-2 border-black relative">
+              <div class="w-full border-t border-slate-100 h-0"></div>
+              <div class="w-full border-t border-slate-100 h-0"></div>
+              <div class="w-full border-t border-slate-100 h-0"></div>
+              <div class="w-full border-t border-slate-100 h-0"></div>
+              <!-- Safety Stock Line -->
+              <div class="absolute bottom-[30%] w-full h-[2px] bg-accent/20 border-t-2 border-dashed border-accent flex items-center justify-end pr-4">
+                <span class="text-[9px] font-black text-accent bg-white px-2 tracking-widest">CRITICAL SAFETY THRESHOLD</span>
+              </div>
+              <!-- Forecast Path SVG -->
+              <div class="absolute inset-0 pointer-events-none">
+                <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1000 100">
+                  <path d="M 0 50 Q 50 40 100 60 T 200 45 T 300 55" fill="none" class="stroke-slate-200" stroke-dasharray="10" stroke-width="2" />
+                  <path d="M 300 55 Q 350 30 400 75 T 500 40 T 600 85 T 700 30 T 800 95 T 900 60 T 1000 70 L 1000 100 L 300 100 Z" class="fill-black/5" />
+                  <path d="M 300 55 Q 350 30 400 75 T 500 40 T 600 85 T 700 30 T 800 95 T 900 60 T 1000 70" fill="none" class="stroke-black" stroke-width="3" />
+                </svg>
+                <!-- Risk Markers -->
+                <div class="absolute left-[39.5%] bottom-[24%] -translate-x-1/2 flex flex-col items-center">
+                  <div class="size-3 bg-accent border-4 border-white shadow-xl ring-2 ring-accent/30 rounded-full"></div>
+                  <div class="mt-2 bg-accent text-white text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-widest">Alert</div>
+                </div>
+              </div>
+            </div>
+            <!-- X-Axis Labels -->
+            <div class="flex justify-between mt-6 px-4 text-[10px] font-black text-black tracking-widest">
+              <span>OCTOBER</span><span>NOVEMBER</span><span>DECEMBER</span><span>JANUARY</span><span>FEBRUARY</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Insight Card -->
+        <div class="bg-black text-white p-8 flex items-center gap-8 shadow-2xl group hover:bg-slate-900 transition-all border-l-4 border-l-success">
+          <div class="size-12 bg-success text-white rounded flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-2xl">insights</span>
+          </div>
+          <div class="flex-1">
+            <h4 class="text-xs font-black uppercase tracking-[0.2em] text-success mb-1">Model Optimization Insight</h4>
+            <p class="text-sm font-bold tracking-tight opacity-90">Seasonal trends suggest a 15% demand variance. System recommends updating safety buffer by <span class="text-success underline">+200 Units</span>.</p>
+          </div>
+          <button class="px-8 py-3 bg-white text-black text-[10px] font-black uppercase tracking-widest hover:bg-success hover:text-white transition-all shadow-xl">
+            Execute Mitigation
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>

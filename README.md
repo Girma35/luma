@@ -1,10 +1,45 @@
 # ReOrder AI
 
-That is a fantastic choice. **ReOrder AI** is a "pain-killer" product because it directly impacts a business owner's bank account. In 2026, the gap between "data" and "decision" is where the most money is made.
+Supply chain forecasting and inventory optimization for Shopify and WooCommerce. The dashboard shows KPIs, risk alerts, reorder suggestions, and SKU-level detail—powered by a FastAPI backend with optional live integrations.
 
-To get this off the ground, we focus on the **"Minimum Viable Data"**—getting the right info out of Shopify and WooCommerce so our AI can actually make a prediction.
+---
 
-## Project Structure (Target)
+## Quick start
+
+**1. Backend (API)**
+
+```bash
+# From repo root
+cp .env.example .env   # optional: edit for Shopify/WooCommerce
+pip install -r requirements.txt
+uvicorn src.api.main:app --reload --port 8000
+```
+
+API: **http://localhost:8000** — Docs: http://localhost:8000/docs
+
+**2. Dashboard**
+
+```bash
+cd dashboard
+npm install
+npm run dev
+```
+
+Dashboard: **http://localhost:4321**
+
+The dashboard uses the API at `http://localhost:8000` by default. To point at another host, set `PUBLIC_API_URL` in `dashboard/.env` (e.g. `PUBLIC_API_URL=https://api.example.com`).
+
+**3. Run both with Docker**
+
+```bash
+docker-compose up --build
+```
+
+API on port 8000; serve the dashboard separately or build and host the `dashboard` static build elsewhere.
+
+---
+
+## Project Structure
 
 - `src/api/`: FastAPI backend for data ingestion and AI orchestration.
 - `src/core/`: Forecasting logic and integration with Amazon Forecast/Vertex AI.
