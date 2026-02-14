@@ -46,7 +46,11 @@ const MetricCard: React.FC<MetricCardProps> = ({ icon, label, value, unit, trend
     );
 };
 
-export const SkuMetricCards: React.FC = () => {
+interface SkuMetricCardsProps {
+    sku?: string;
+}
+
+export const SkuMetricCards: React.FC<SkuMetricCardsProps> = () => {
     const { salesVelocity, avgLeadTime, currentStock } = skuDetailData;
 
     return (

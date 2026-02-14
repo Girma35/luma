@@ -1,20 +1,23 @@
 /**
- * ReOrder AI — API client for dashboard
- * Uses PUBLIC_API_URL (e.g. http://localhost:8000) with fallback.
+ * ReOrder AI — API client for the FastAPI backend.
+ * Uses PUBLIC_API_URL in .env or defaults to http://localhost:8000.
  */
 
-const BASE =
-  (typeof import.meta !== "undefined" && (import.meta as unknown as { env?: { PUBLIC_API_URL?: string } }).env?.PUBLIC_API_URL) ||
-  "http://localhost:8000";
+const API_BASE =
+  typeof import.meta.env !== "undefined" && import.meta.env?.PUBLIC_API_URL
+    ? (import.meta.env as { PUBLIC_API_URL?: string }).PUBLIC_API_URL
+    : "http://localhost:8000";
 
 export type KPI = { label: string; value: string; trend: string; status: string };
+export type { KPI as DashboardKPI };
 export type Alert = {
   id: string;
   type: string;
   title: string;
   message: string;
   severity: string;
-  created_at?: string;
+  sku?: string;
+  created_at: string;
   resolved?: boolean;
 };
 export type ReorderSuggestion = {
@@ -65,28 +68,23 @@ export type InventoryItem = {
   last_synced_at?: string;
 };
 
-async function get<T>(path: string): Promise<T> {
-  const res = await fetch(`${BASE}${path}`, { headers: { Accept: "application/json" } });
+async function fetchApi<T>(path: string, options?: RequestInit): Promise<T> {
+  const res = await fetch(`${API_BASE}${path}`, {
+    ...options,
+    headers: { "Content-Type": "application/json", ...options?.headers },
+  });
   if (!res.ok) throw new Error(`API ${res.status}: ${path}`);
   return res.json() as Promise<T>;
 }
 
-export async function getDashboard(): Promise<DashboardResponse | null> {
-  try {
-    return await get<DashboardResponse>("/dashboard");
-  } catch {
-    return null;
-  }
+export async function getDashboard(): Promise<DashboardResponse> {
+  return fetchApi<DashboardResponse>("/dashboard");
 }
 
-export async function getTrends(period: "weekly" | "monthly" = "weekly", category?: string): Promise<TrendsResponse | null> {
-  try {
-    const q = new URLSearchParams({ period });
-    if (category && category !== "All") q.set("category", category);
-    return await get<TrendsResponse>(`/dashboard/trends?${q}`);
-  } catch {
-    return null;
-  }
+export async function getTrends(period: "weekly" | "monthly" = "weekly", category?: string): Promise<TrendsResponse> {
+  const q = new URLSearchParams({ period });
+  if (category && category !== "All") q.set("category", category);
+  return fetchApi<TrendsResponse>(`/dashboard/trends?${q}`);
 }
 
 export async function getInventory(params?: {
@@ -95,26 +93,20 @@ export async function getInventory(params?: {
   category?: string;
   search?: string;
 }): Promise<InventoryItem[]> {
-  try {
-    const q = params ? new URLSearchParams(params as Record<string, string>) : "";
-    return await get<InventoryItem[]>(`/inventory${q ? `?${q}` : ""}`);
-  } catch {
-    return [];
-  }
+  const q = new URLSearchParams();
+  if (params?.status) q.set("status", params.status);
+  if (params?.platform) q.set("platform", params.platform);
+  if (params?.category) q.set("category", params.category);
+  if (params?.search) q.set("search", params.search);
+  const suffix = q.toString() ? `?${q}` : "";
+  return fetchApi<InventoryItem[]>(`/inventory${suffix}`);
 }
 
-export async function getInventoryItem(id: string): Promise<InventoryItem | null> {
-  try {
-    return await get<InventoryItem>(`/inventory/${id}`);
-  } catch {
-    return null;
-  }
+export async function getInventoryBySku(sku: string): Promise<InventoryItem | null> {
+  const res = await fetch(`${API_BASE}/inventory/sku/${encodeURIComponent(sku)}`);
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`API ${res.status}`);
+  return res.json() as Promise<InventoryItem>;
 }
 
-export async function getHealth(): Promise<{ status: string } | null> {
-  try {
-    return await get<{ status: string }>("/health");
-  } catch {
-    return null;
-  }
-}
+export { API_BASE };

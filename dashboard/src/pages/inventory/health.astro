@@ -2,16 +2,17 @@
 import Layout from '../../layouts/Layout.astro';
 import { Sidebar } from '../../components/Sidebar';
 import { Header } from '../../components/Header';
+import { InventoryTable } from '../../components/InventoryTable';
 ---
 
 <Layout title="Inventory Performance - ReOrder AI">
   <div class="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark">
-    <Sidebar currentPath="/inventory/health" />
+    <Sidebar client:load currentPath={Astro.url.pathname} />
 
     <!-- Main Content Area -->
     <main class="flex-1 flex flex-col overflow-y-auto">
       <!-- Top Header -->
-      <Header />
+      <Header client:load />
 
       <div class="flex-1 px-10 py-8 max-w-[1400px] mx-auto w-full">
         <!-- Header Section -->
@@ -90,74 +91,8 @@ import { Header } from '../../components/Header';
           </div>
         </div>
 
-        <!-- Inventory Breakdown -->
-        <div class="flex items-center justify-between mb-8 border-b border-slate-100 pb-4">
-          <h3 class="text-lg font-black text-black uppercase tracking-tighter">Asset Breakdown</h3>
-          <div class="flex gap-2">
-            <button class="px-4 py-1.5 text-[10px] font-black bg-black text-white uppercase tracking-widest">All</button>
-            <button class="px-4 py-1.5 text-[10px] font-black bg-white border border-slate-200 text-slate-400 uppercase tracking-widest">Risk Only</button>
-          </div>
-        </div>
-
-        <!-- Inventory Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Card High Risk -->
-          <div class="bg-white border border-slate-200 shadow-md group">
-            <div class="h-1 bg-accent w-full"></div>
-            <div class="p-6">
-              <div class="flex justify-between items-start mb-6">
-                <div>
-                  <h4 class="text-lg font-black text-black uppercase tracking-tighter">Industrial Fan X</h4>
-                  <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">INF-9920-B</p>
-                </div>
-                <p class="text-xl font-black text-accent">$8,400</p>
-              </div>
-              <div class="flex gap-4 mb-6">
-                <div class="flex-1 bg-slate-50 p-4 border border-slate-100">
-                  <p class="text-[8px] font-black text-slate-400 uppercase mb-1">Stock</p>
-                  <p class="font-bold text-black text-lg">142</p>
-                </div>
-                <div class="flex-1 bg-slate-50 p-4 border border-slate-100">
-                  <p class="text-[8px] font-black text-slate-400 uppercase mb-1">Velocity</p>
-                  <p class="font-bold text-accent text-lg">0.2x</p>
-                </div>
-              </div>
-              <div class="bg-accent/5 p-3 text-[10px] font-bold text-accent uppercase tracking-widest mb-6 flex gap-2">
-                <span class="material-symbols-outlined text-sm">info</span>
-                AI Suggests liquidation move
-              </div>
-              <button class="w-full py-3 bg-black text-white text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all">Execute Clearance</button>
-            </div>
-          </div>
-
-          <!-- Card Healthy -->
-          <div class="bg-white border border-slate-200 shadow-md group">
-            <div class="h-1 bg-success w-full text-white"></div>
-            <div class="p-6">
-              <div class="flex justify-between items-start mb-6">
-                <div>
-                  <h4 class="text-lg font-black text-black uppercase tracking-tighter">Bearing Kit V2</h4>
-                  <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">PBK-552-MK</p>
-                </div>
-                <p class="text-xl font-black text-black tracking-tighter">1.2k U.</p>
-              </div>
-              <div class="flex gap-4 mb-6">
-                <div class="flex-1 bg-slate-50 p-4 border border-slate-100">
-                  <p class="text-[8px] font-black text-slate-400 uppercase mb-1">Turnover</p>
-                  <p class="font-bold text-success text-lg">18.5x</p>
-                </div>
-                <div class="flex-1 bg-slate-50 p-4 border border-slate-100">
-                  <p class="text-[8px] font-black text-slate-400 uppercase mb-1">Status</p>
-                  <p class="font-bold text-success text-lg uppercase">Strong</p>
-                </div>
-              </div>
-              <div class="bg-success text-white p-3 text-[10px] font-black uppercase tracking-widest flex items-center justify-between">
-                <span>Auto-Reorder Online</span>
-                <span class="material-symbols-outlined text-sm">shield_check</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- Live inventory from API -->
+        <InventoryTable client:load />
       </div>
     </main>
   </div>

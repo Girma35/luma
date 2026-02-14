@@ -1,0 +1,92 @@
+---
+/**
+ * Paddle pricing page: "Subscribe with Paddle" opens checkout with customData.user_id.
+ * PAUSED: Billing is disabled; this page is kept for when Paddle is re-enabled (see middleware PADDLE_BILLING_ENABLED).
+ */
+import Layout from "../layouts/Layout.astro";
+import { auth } from "../lib/auth";
+
+export const prerender = false;
+
+const session = await auth.api.getSession({ headers: Astro.request.headers });
+if (!session?.user) {
+  return Astro.redirect("/login");
+}
+
+const paddleClientToken = import.meta.env.PUBLIC_PADDLE_CLIENT_TOKEN as string | undefined;
+const paddlePriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID as string | undefined;
+const userId = session.user.id;
+---
+
+<Layout title="Pricing - ReOrder AI">
+  <div class="min-h-screen flex flex-col items-center justify-center bg-background-light dark:bg-background-dark px-4 py-12">
+    <div class="w-full max-w-2xl">
+      <div class="text-center mb-12">
+        <div class="size-16 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black mx-auto mb-4">
+          <span class="material-symbols-outlined text-4xl">payments</span>
+        </div>
+        <h1 class="text-3xl font-black tracking-tighter text-black dark:text-white uppercase">
+          Subscribe to unlock
+        </h1>
+        <p class="text-slate-500 text-sm font-bold uppercase tracking-widest mt-2">
+          Full dashboard • Forecasts • Inventory • Simulator
+        </p>
+      </div>
+
+      <div class="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl shadow-xl p-8 text-center">
+        <p class="text-black dark:text-white font-medium mb-6">
+          Only paying subscribers can use all features. Subscribe with Paddle to get access.
+        </p>
+        {paddleClientToken && paddlePriceId ? (
+          <button
+            type="button"
+            id="paddle-checkout-btn"
+            class="w-full max-w-sm mx-auto bg-black dark:bg-white text-white dark:text-black font-black px-8 py-4 rounded-lg text-sm uppercase tracking-widest hover:opacity-90 transition-opacity"
+          >
+            Subscribe with Paddle
+          </button>
+        ) : (
+          <p class="text-amber-600 dark:text-amber-400 text-sm font-medium">
+            Paddle is not configured. Set PUBLIC_PADDLE_CLIENT_TOKEN and PUBLIC_PADDLE_PRICE_ID.
+          </p>
+        )}
+        <a
+          href="/"
+          class="inline-block mt-6 text-slate-500 text-xs font-bold uppercase tracking-widest hover:text-black dark:hover:text-white transition-colors"
+        >
+          Back to dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {paddleClientToken && paddlePriceId && (
+    <script is:inline define:vars={{ userId, paddleClientToken, paddlePriceId }}>
+      (function () {
+        const btn = document.getElementById("paddle-checkout-btn");
+        if (!btn) return;
+        btn.addEventListener("click", function () {
+          if (typeof window.Paddle === "undefined") {
+            const script = document.createElement("script");
+            script.src = "https://cdn.paddle.com/paddle/v2/paddle.js";
+            script.onload = openCheckout;
+            document.head.appendChild(script);
+          } else {
+            openCheckout();
+          }
+        });
+
+        function openCheckout() {
+          if (typeof window.Paddle === "undefined") return;
+          var base = window.location.origin;
+          window.Paddle.Initialize({ token: paddleClientToken });
+          window.Paddle.Checkout.open({
+            settings: { displayMode: "overlay", successUrl: base + "/" },
+            items: [{ priceId: paddlePriceId, quantity: 1 }],
+            customData: { user_id: userId },
+          });
+        }
+      })();
+    </script>
+  )}
+</Layout>

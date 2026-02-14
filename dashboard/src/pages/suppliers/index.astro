@@ -6,12 +6,12 @@ import { Header } from '../../components/Header';
 
 <Layout title="Vendor Intelligence - ReOrder AI">
   <div class="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark">
-    <Sidebar currentPath="/suppliers" />
+    <Sidebar client:load currentPath={Astro.url.pathname} />
 
     <!-- Main Content Area -->
     <main class="flex-1 flex flex-col overflow-y-auto">
       <!-- Top Header -->
-      <Header />
+      <Header client:load />
 
       <div class="flex-1 px-4 md:px-10 py-8 max-w-[1400px] mx-auto w-full">
         <!-- Stats Overview -->

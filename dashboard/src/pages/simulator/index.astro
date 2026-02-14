@@ -6,7 +6,7 @@ import { Header } from '../../components/Header';
 
 <Layout title="Strategic Simulator - ReOrder AI">
   <div class="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark">
-    <Sidebar currentPath="/simulator" />
+    <Sidebar client:load currentPath={Astro.url.pathname} />
 
     <!-- Simulation Inputs Sidebar -->
     <aside class="w-80 border-r border-slate-200 bg-white flex flex-col overflow-y-auto p-8 gap-10 shrink-0">
@@ -63,7 +63,7 @@ import { Header } from '../../components/Header';
     <!-- Main Content Area -->
     <main class="flex-1 flex flex-col overflow-hidden">
       <!-- Top Header -->
-      <Header />
+      <Header client:load />
 
       <section class="flex-1 overflow-y-auto p-12 space-y-12 max-w-[1200px] mx-auto w-full">
         <!-- Metrics Header -->

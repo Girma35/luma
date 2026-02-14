@@ -1,6 +1,9 @@
 """
 ReOrder AI — Application Configuration
 Loads all settings from .env using pydantic-settings for type safety and validation.
+
+Store credentials (Shopify/WooCommerce) come from users via the dashboard
+Connect flow, NOT from .env. Only server-operator settings go here.
 """
 
 from pydantic_settings import BaseSettings
@@ -12,20 +15,17 @@ from functools import lru_cache
 class Settings(BaseSettings):
     """Central configuration loaded from .env file."""
 
-    # ── Shopify ──────────────────────────────────────────────
-    shopify_shop_url: str = Field(default="", description="e.g. your-shop.myshopify.com")
-    shopify_access_token: str = Field(default="", description="Shopify Admin API access token")
+    # ── Environment ──────────────────────────────────────────
+    environment: str = Field(
+        default="development",
+        description="development | staging | production"
+    )
 
-    # ── WooCommerce ──────────────────────────────────────────
-    woocommerce_site_url: str = Field(default="", description="e.g. https://your-store.com")
-    woocommerce_consumer_key: str = Field(default="", description="WooCommerce REST API consumer key")
-    woocommerce_consumer_secret: str = Field(default="", description="WooCommerce REST API consumer secret")
-
-    # ── AI Forecasting ───────────────────────────────────────
-    forecast_provider: str = Field(default="simple", description="simple | amazon_forecast | google_vertex_ai")
-    aws_region: str = Field(default="us-east-1")
-    aws_access_key_id: str = Field(default="")
-    aws_secret_access_key: str = Field(default="")
+    # ── Database ─────────────────────────────────────────────
+    database_url: str = Field(
+        default="sqlite:///./reorder_ai.db",
+        description="SQLite (default) or PostgreSQL URL for production"
+    )
 
     # ── API Settings ─────────────────────────────────────────
     log_level: str = Field(default="INFO")
@@ -35,10 +35,33 @@ class Settings(BaseSettings):
         description="Comma-separated list of allowed CORS origins"
     )
 
-    # ── Database ─────────────────────────────────────────────
-    database_url: str = Field(
-        default="sqlite:///./reorder_ai.db",
-        description="SQLite connection string (default) or PostgreSQL URL for production"
+    # ── Security ─────────────────────────────────────────────
+    api_secret_key: str = Field(
+        default="",
+        description="API key for protected endpoints. Empty = auth disabled (dev mode)."
+    )
+    rate_limit_default: str = Field(
+        default="60/minute",
+        description="Default rate limit (e.g. '60/minute', '1000/hour')"
+    )
+    rate_limit_sync: str = Field(
+        default="10/minute",
+        description="Stricter rate limit for sync/pipeline/forecast-run endpoints"
+    )
+
+    # ── AWS (for Forecast service) ───────────────────────────
+    forecast_provider: str = Field(
+        default="simple",
+        description="simple (local math fallback) | amazon_forecast (AWS)"
+    )
+    aws_region: str = Field(default="us-east-1")
+    aws_access_key_id: str = Field(default="")
+    aws_secret_access_key: str = Field(default="")
+
+    # ── Forecast Scheduler ───────────────────────────────────
+    forecast_refresh_hours: int = Field(
+        default=24,
+        description="Auto-refresh forecasts every N hours. 0 = disabled."
     )
 
     model_config = {
@@ -48,26 +71,15 @@ class Settings(BaseSettings):
     }
 
     @property
+    def is_production(self) -> bool:
+        return self.environment.lower() in ("production", "prod")
+
+    @property
     def cors_origin_list(self) -> list[str]:
-        """Parse comma-separated CORS origins into a list."""
         return [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
-
-    @property
-    def shopify_configured(self) -> bool:
-        return bool(self.shopify_shop_url and self.shopify_access_token
-                     and not self.shopify_access_token.startswith("shpat_xxx"))
-
-    @property
-    def woocommerce_configured(self) -> bool:
-        return bool(self.woocommerce_site_url and self.woocommerce_consumer_key
-                     and not self.woocommerce_consumer_key.startswith("ck_xxx"))
 
 
 @lru_cache()
 def get_settings() -> Settings:
-    """
-    Cached singleton — call this from anywhere to access config.
-    Usage:  from src.core.config import get_settings
-            settings = get_settings()
-    """
+    """Cached singleton — call from anywhere to access config."""
     return Settings()

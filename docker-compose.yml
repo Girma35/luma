@@ -1,19 +1,48 @@
-version: '3.8'
+# ══════════════════════════════════════════════════════════════
+# ReOrder AI — Docker Compose (production)
+# Usage: docker compose up -d
+# ══════════════════════════════════════════════════════════════
 
 services:
+  # ── PostgreSQL ─────────────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: reorder
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme}
+      POSTGRES_DB: reorder_ai
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U reorder -d reorder_ai"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── FastAPI Backend ────────────────────────────────────────
   api:
     build: .
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://reorder:${DB_PASSWORD:-changeme}@db:5432/reorder_ai
     ports:
       - "8000:8000"
-    env_file:
-      - .env
-    volumes:
-      - ./src:/app/src
-      - ./data:/app/data
-    restart: always
 
-  # Optional: Vector DB like Chroma or Qdrant could be added here
-  # chromadb:
-  #   image: chromadb/chroma
-  #   ports:
-  #     - "8001:8000"
+  # ── Astro Dashboard ────────────────────────────────────────
+  dashboard:
+    build: ./dashboard
+    restart: always
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "4321"
+      NODE_ENV: production
+    ports:
+      - "4321:4321"
+
+volumes:
+  pgdata:

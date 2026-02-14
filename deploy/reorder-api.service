@@ -1,0 +1,32 @@
+# /etc/systemd/system/reorder-api.service
+# FastAPI backend served by Gunicorn + Uvicorn workers
+
+[Unit]
+Description=ReOrder AI — FastAPI Backend
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+User=deploy
+Group=deploy
+WorkingDirectory=/home/deploy/reorder-ai
+EnvironmentFile=/home/deploy/reorder-ai/.env
+
+ExecStart=/home/deploy/reorder-ai/.venv/bin/gunicorn \
+    -c gunicorn.conf.py \
+    src.api.main:app
+
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=reorder-api
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/deploy/reorder-ai
+
+[Install]
+WantedBy=multi-user.target

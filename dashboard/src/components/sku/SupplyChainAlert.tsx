@@ -1,7 +1,11 @@
 import React from "react";
 import { skuDetailData } from "../../data/skuDetailData";
 
-export const SupplyChainAlert: React.FC = () => {
+interface SupplyChainAlertProps {
+    sku?: string;
+}
+
+export const SupplyChainAlert: React.FC<SupplyChainAlertProps> = () => {
     const alert = skuDetailData.alert;
     if (!alert) return null;
 

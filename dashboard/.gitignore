@@ -17,6 +17,13 @@ pnpm-debug.log*
 .env
 .env.production
 
+# Better Auth SQLite DB (local dev)
+auth.db
+auth.db-journal
+# Store connections DB
+connections.db
+connections.db-journal
+
 # macOS-specific files
 .DS_Store
 

@@ -1,83 +1,105 @@
-import { useEffect, useState } from 'react';
-import { fetchInventory, type InventoryItem } from '../lib/api';
+import React, { useEffect, useState } from 'react';
+import { getInventory, type InventoryItem } from '../lib/api';
 
-function StatusBadge({ status }: { status: string }) {
-  const styles: Record<string, string> = {
-    REORDER_NOW: 'bg-red-500/20 text-red-400 border-red-500/50',
-    DEAD_STOCK: 'bg-amber-500/20 text-amber-400 border-amber-500/50',
-    OK: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50',
-  };
-  const label = status === 'REORDER_NOW' ? 'Reorder now' : status === 'DEAD_STOCK' ? 'Dead stock' : 'Healthy';
-  return (
-    <span className={`px-3 py-1 rounded-full text-xs font-bold border ${styles[status] || 'bg-white/10'}`}>
-      {label}
-    </span>
-  );
-}
+const STATUS_STYLES: Record<string, string> = {
+  OK: 'bg-success/10 text-success',
+  LOW_STOCK: 'bg-accent/10 text-accent',
+  REORDER_NOW: 'bg-accent text-white',
+  OUT_OF_STOCK: 'bg-accent text-white',
+  DEAD_STOCK: 'bg-slate-200 text-slate-600 dark:bg-white/10 dark:text-slate-400',
+};
 
-export default function InventoryTable() {
+export const InventoryTable: React.FC = () => {
   const [items, setItems] = useState<InventoryItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [filter, setFilter] = useState<'all' | 'risk'>('all');
 
   useEffect(() => {
-    fetchInventory()
+    getInventory()
       .then(setItems)
-      .catch((e) => setError(e instanceof Error ? e.message : 'Failed to load'))
+      .catch(() => setItems([]))
       .finally(() => setLoading(false));
   }, []);
 
-  if (error) {
+  const riskStatuses = ['REORDER_NOW', 'LOW_STOCK', 'OUT_OF_STOCK', 'DEAD_STOCK'];
+  const filtered = filter === 'risk' ? items.filter((i) => riskStatuses.includes(i.status)) : items;
+
+  if (loading) {
     return (
-      <div className="rounded-2xl p-6 border border-red-500/30 bg-red-500/5 text-red-400">
-        <p>{error}</p>
+      <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded overflow-hidden">
+        <div className="p-8 text-center text-slate-500">Loading inventory…</div>
       </div>
     );
   }
 
-  if (loading) {
+  if (items.length === 0) {
     return (
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-8 animate-pulse">
-        <div className="h-8 w-48 bg-white/10 rounded mb-6" />
-        <div className="space-y-3">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="h-12 bg-white/10 rounded" />
-          ))}
-        </div>
+      <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded p-8 text-center text-slate-500">
+        No inventory data. Start the API or sync from Shopify/WooCommerce.
       </div>
     );
   }
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
-      <div className="overflow-x-auto">
-        <table className="w-full text-left">
-          <thead>
-            <tr className="border-b border-white/10 text-white/60 text-sm font-semibold">
-              <th className="p-4">SKU</th>
-              <th className="p-4">Product</th>
-              <th className="p-4">Stock</th>
-              <th className="p-4">Reorder at</th>
-              <th className="p-4">Demand (30d)</th>
-              <th className="p-4">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((row) => (
-              <tr key={row.sku} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                <td className="p-4 font-mono text-sm">{row.sku}</td>
-                <td className="p-4 font-medium">{row.product_name}</td>
-                <td className="p-4">{row.current_stock}</td>
-                <td className="p-4">{row.reorder_point ?? '—'}</td>
-                <td className="p-4">{row.predicted_demand_30d != null ? row.predicted_demand_30d.toFixed(1) : '—'}</td>
-                <td className="p-4">
-                  <StatusBadge status={row.status} />
-                </td>
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-black text-black dark:text-white uppercase tracking-tighter">Asset Breakdown</h3>
+        <div className="flex gap-2">
+          <button
+            className={`px-4 py-1.5 text-[10px] font-black uppercase tracking-widest ${filter === 'all' ? 'bg-black text-white dark:bg-white dark:text-black' : 'bg-white dark:bg-white/10 border border-slate-200 dark:border-white/20 text-slate-400 dark:text-slate-400'}`}
+            onClick={() => setFilter('all')}
+          >
+            All
+          </button>
+          <button
+            className={`px-4 py-1.5 text-[10px] font-black uppercase tracking-widest ${filter === 'risk' ? 'bg-black text-white dark:bg-white dark:text-black' : 'bg-white dark:bg-white/10 border border-slate-200 dark:border-white/20 text-slate-400 dark:text-slate-400'}`}
+            onClick={() => setFilter('risk')}
+          >
+            Risk Only
+          </button>
+        </div>
+      </div>
+      <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-black text-white text-[10px] font-black uppercase tracking-widest">
+                <th className="px-6 py-4">SKU / Product</th>
+                <th className="px-6 py-4">Category</th>
+                <th className="px-6 py-4">Stock</th>
+                <th className="px-6 py-4">Status</th>
+                <th className="px-6 py-4">Value</th>
+                <th className="px-6 py-4 text-right">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-white/10">
+              {filtered.map((item) => (
+                <tr key={item.id} className="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+                  <td className="px-6 py-4">
+                    <a href={`/sku/${item.sku}`} className="block group">
+                      <span className="font-black text-black dark:text-white text-sm uppercase tracking-tighter group-hover:underline">{item.product_name}</span>
+                      <span className="text-[9px] text-slate-400 font-bold tracking-widest uppercase block">{item.sku}</span>
+                    </a>
+                  </td>
+                  <td className="px-6 py-4 text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase">{item.category}</td>
+                  <td className="px-6 py-4 text-sm font-bold text-black dark:text-white">{item.current_stock}</td>
+                  <td className="px-6 py-4">
+                    <span className={`px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest ${STATUS_STYLES[item.status] ?? 'bg-slate-100 text-slate-600'}`}>
+                      {item.status.replace('_', ' ')}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 text-sm font-black text-black dark:text-white">${(item.current_stock * item.unit_cost).toLocaleString()}</td>
+                  <td className="px-6 py-4 text-right">
+                    <a href={`/sku/${item.sku}`} className="inline-block bg-black dark:bg-white text-white dark:text-black px-4 py-1.5 rounded text-[9px] font-black uppercase tracking-widest hover:opacity-90 transition-all">
+                      View
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
-}
+};

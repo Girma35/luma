@@ -1,0 +1,43 @@
+---
+import { auth } from "../../../lib/auth";
+import { setOAuthState } from "../../../lib/connections";
+import crypto from "node:crypto";
+
+export const prerender = false;
+
+const shop = Astro.url.searchParams.get("shop")?.trim()?.toLowerCase();
+if (!shop || !shop.endsWith(".myshopify.com")) {
+  return Astro.redirect("/connect?error=invalid_shop");
+}
+
+const session = await auth.api.getSession({ headers: Astro.request.headers });
+if (!session?.user) {
+  return Astro.redirect("/login");
+}
+
+const clientId = process.env.SHOPIFY_CLIENT_ID;
+const baseUrl = process.env.BETTER_AUTH_URL ?? "http://localhost:4321";
+const redirectUri = `${baseUrl}/connect/shopify/callback`;
+
+if (!clientId) {
+  return Astro.redirect("/connect?error=shopify_not_configured");
+}
+
+const state = crypto.randomBytes(16).toString("hex");
+setOAuthState(state, session.user.id);
+
+const scopes = [
+  "read_orders",
+  "read_products",
+  "read_inventory",
+  "read_customers",
+].join(",");
+
+const authUrl = new URL(`https://${shop}/admin/oauth/authorize`);
+authUrl.searchParams.set("client_id", clientId);
+authUrl.searchParams.set("scope", scopes);
+authUrl.searchParams.set("redirect_uri", redirectUri);
+authUrl.searchParams.set("state", state);
+
+return Astro.redirect(authUrl.toString());
+---

@@ -1,8 +1,16 @@
 fastapi
-uvicorn
+uvicorn[standard]
+gunicorn
 pydantic-settings
 python-dotenv
 pandas
+numpy
 boto3
 httpx
 pytest
+sqlalchemy>=2.0
+alembic
+psycopg2-binary
+statsmodels
+apscheduler
+slowapi

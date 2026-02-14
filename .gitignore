@@ -7,6 +7,14 @@ __pycache__/
 # Environment
 .env
 
+# Database
+*.db
+*.db-journal
+*.sqlite3
+
+# Virtual environment
+.venv/
+
 # Data
 enterprise-knowledge-agent/data/*
 !enterprise-knowledge-agent/data/.gitkeep

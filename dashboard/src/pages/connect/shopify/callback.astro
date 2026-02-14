@@ -1,0 +1,74 @@
+---
+import { auth } from "../../../lib/auth";
+import {
+  consumeOAuthState,
+  setShopifyConnection,
+} from "../../../lib/connections";
+import crypto from "node:crypto";
+
+export const prerender = false;
+
+const url = Astro.url;
+const code = url.searchParams.get("code");
+const shop = url.searchParams.get("shop")?.trim()?.toLowerCase();
+const hmac = url.searchParams.get("hmac");
+const state = url.searchParams.get("state");
+
+const baseUrl = process.env.BETTER_AUTH_URL ?? "http://localhost:4321";
+const clientId = process.env.SHOPIFY_CLIENT_ID;
+const clientSecret = process.env.SHOPIFY_CLIENT_SECRET;
+
+if (!code || !shop || !hmac || !state || !clientId || !clientSecret) {
+  return Astro.redirect("/connect?error=callback_missing");
+}
+
+// Verify HMAC: sort params (excluding hmac/signature), join as key=value&..., HMAC-SHA256 with client_secret
+const params = new URLSearchParams(url.search);
+params.delete("hmac");
+params.delete("signature");
+const sorted = Array.from(params.entries())
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([k, v]) => `${k}=${v}`)
+  .join("&");
+const computed = crypto
+  .createHmac("sha256", clientSecret)
+  .update(sorted)
+  .digest("hex");
+if (computed !== hmac) {
+  return Astro.redirect("/connect?error=hmac_invalid");
+}
+
+const userId = consumeOAuthState(state);
+if (!userId) {
+  return Astro.redirect("/connect?error=state_invalid");
+}
+
+const redirectUri = `${baseUrl}/connect/shopify/callback`;
+const body = new URLSearchParams({
+  client_id: clientId,
+  client_secret: clientSecret,
+  code,
+  redirect_uri: redirectUri,
+});
+
+const tokenRes = await fetch(`https://${shop}/admin/oauth/access_token`, {
+  method: "POST",
+  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  body: body.toString(),
+});
+
+if (!tokenRes.ok) {
+  const err = await tokenRes.text();
+  console.error("Shopify token exchange failed:", err);
+  return Astro.redirect("/connect?error=token_exchange");
+}
+
+const tokenData = (await tokenRes.json()) as { access_token?: string };
+const accessToken = tokenData.access_token;
+if (!accessToken) {
+  return Astro.redirect("/connect?error=no_token");
+}
+
+setShopifyConnection(userId, shop, accessToken);
+return Astro.redirect("/");
+---

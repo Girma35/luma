@@ -6,7 +6,7 @@ import { Header } from '../../components/Header';
 
 <Layout title="Predictive Forecasting - ReOrder AI">
   <div class="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark">
-    <Sidebar currentPath="/forecasts" />
+    <Sidebar client:load currentPath={Astro.url.pathname} />
 
     <!-- SKU Filter Sidebar -->
     <aside class="w-72 border-r border-slate-200 bg-white flex flex-col shrink-0">
@@ -53,7 +53,7 @@ import { Header } from '../../components/Header';
     <!-- Main Content Area -->
     <main class="flex-1 flex flex-col overflow-hidden">
       <!-- Top Header -->
-      <Header />
+      <Header client:load />
 
       <!-- Scrollable Content -->
       <div class="flex-1 overflow-y-auto p-10 space-y-10 max-w-[1200px] mx-auto w-full">

@@ -2,19 +2,38 @@
 import Layout from '../../layouts/Layout.astro';
 import { Sidebar } from '../../components/Sidebar';
 import { Header } from '../../components/Header';
-import { SkuPageContent } from '../../components/sku/SkuPageContent';
+import { SkuHeader } from '../../components/sku/SkuHeader';
+import { SupplyChainAlert } from '../../components/sku/SupplyChainAlert';
+import { SkuMetricCards } from '../../components/sku/SkuMetricCards';
+import { SupplierInfo } from '../../components/sku/SupplierInfo';
+import { ForecastChart } from '../../components/sku/ForecastChart';
 
-export const prerender = false;
+export function getStaticPaths() {
+  const seedSkus = ['SKU-402', 'SKU-118', 'SKU-205', 'SKU-991', 'SKU-310', 'SKU-455', 'SKU-601', 'SKU-720', 'SKU-888', 'SKU-103', 'SKU-550', 'SKU-215'];
+  return seedSkus.map((id) => ({ params: { id } }));
+}
 
-const { id } = Astro.params ?? {};
+const { id } = Astro.params;
 ---
 
-<Layout title={id ? `SKU - ReOrder AI` : 'SKU - ReOrder AI'}>
+<Layout title={`ReOrder AI - ${id}`}>
   <div class="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark">
-    <Sidebar currentPath="/inventory" />
+    <Sidebar client:load currentPath={Astro.url.pathname} />
+
+    <!-- Main Content Area -->
     <main class="flex-1 flex flex-col overflow-y-auto">
-      <Header />
-      <SkuPageContent client:load id={id ?? ''} />
+      <!-- Top Header -->
+      <Header client:load />
+
+      <div class="flex-1 flex flex-col max-w-[1200px] mx-auto w-full px-4 sm:px-10 py-6 space-y-8">
+        <SkuHeader sku={id} />
+        <SupplyChainAlert sku={id} />
+        <SkuMetricCards sku={id} />
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 pb-10">
+          <SupplierInfo sku={id} />
+          <ForecastChart sku={id} />
+        </div>
+      </div>
     </main>
   </div>
 </Layout>

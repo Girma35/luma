@@ -1,7 +1,11 @@
 import React from "react";
 import { skuDetailData } from "../../data/skuDetailData";
 
-export const ForecastChart: React.FC = () => {
+interface ForecastChartProps {
+    sku?: string;
+}
+
+export const ForecastChart: React.FC<ForecastChartProps> = () => {
     const { forecast } = skuDetailData;
 
     return (

@@ -1,0 +1,31 @@
+# /etc/systemd/system/reorder-dashboard.service
+# Astro dashboard — Node.js standalone server
+
+[Unit]
+Description=ReOrder AI — Astro Dashboard
+After=network.target
+
+[Service]
+User=deploy
+Group=deploy
+WorkingDirectory=/home/deploy/reorder-ai/dashboard
+Environment=HOST=127.0.0.1
+Environment=PORT=4321
+Environment=NODE_ENV=production
+
+ExecStart=/usr/bin/node ./dist/server/entry.mjs
+
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=reorder-dashboard
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/deploy/reorder-ai/dashboard
+
+[Install]
+WantedBy=multi-user.target

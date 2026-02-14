@@ -1,0 +1,114 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { auth } from "../../lib/auth";
+import { getConnection } from "../../lib/connections";
+
+export const prerender = false;
+
+const session = await auth.api.getSession({ headers: Astro.request.headers });
+if (!session?.user) {
+  return Astro.redirect("/login");
+}
+
+const connection = getConnection(session.user.id);
+const error = Astro.url.searchParams.get("error");
+---
+
+<Layout title="Connect your store - ReOrder AI">
+  <div class="min-h-screen flex flex-col items-center justify-center bg-background-light dark:bg-background-dark px-4 py-12">
+    <div class="w-full max-w-2xl">
+      <div class="text-center mb-12">
+        <div class="size-16 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black mx-auto mb-4">
+          <span class="material-symbols-outlined text-4xl">storefront</span>
+        </div>
+        <h1 class="text-3xl font-black tracking-tighter text-black dark:text-white uppercase">
+          Connect your store
+        </h1>
+        <p class="text-slate-500 text-sm font-bold uppercase tracking-widest mt-2">
+          Enter your platform • Click connect • Approve access
+        </p>
+      </div>
+
+      {connection ? (
+        <div class="bg-success/10 border border-success rounded-xl p-8 text-center">
+          <p class="text-success font-black uppercase tracking-widest mb-2">Connected</p>
+          <p class="text-black dark:text-white font-bold">
+            {connection.platform === "shopify"
+              ? connection.shop_domain
+              : connection.wc_site_url}
+          </p>
+          <a
+            href="/"
+            class="inline-block mt-6 bg-black dark:bg-white text-white dark:text-black font-black px-8 py-3 rounded-lg text-sm uppercase tracking-widest hover:opacity-90 transition-opacity"
+          >
+            Go to Dashboard
+          </a>
+        </div>
+      ) : (
+        <>
+          {error && (
+            <div class="mb-6 p-4 rounded-lg bg-accent/10 border border-accent text-accent text-sm font-medium">
+              {error === "invalid_shop" && "Please enter a valid Shopify store (e.g. mystore.myshopify.com)."}
+              {error === "shopify_not_configured" && "Shopify app is not configured. Set SHOPIFY_CLIENT_ID and SHOPIFY_CLIENT_SECRET."}
+              {error === "callback_missing" && "Authorization callback failed. Try again."}
+              {error === "hmac_invalid" && "Security check failed. Try again."}
+              {error === "state_invalid" && "Session expired. Try connecting again."}
+              {error === "token_exchange" && "Could not get access. Try again."}
+              {error === "no_token" && "No access token received. Try again."}
+              {!["invalid_shop", "shopify_not_configured", "callback_missing", "hmac_invalid", "state_invalid", "token_exchange", "no_token"].includes(error) && "Something went wrong. Try again."}
+            </div>
+          )}
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Shopify -->
+            <div class="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl shadow-xl p-8 flex flex-col">
+              <div class="size-12 rounded-lg bg-green-600 text-white flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-2xl">shopping_bag</span>
+              </div>
+              <h2 class="text-xl font-black text-black dark:text-white uppercase tracking-tighter mb-2">Shopify</h2>
+              <p class="text-slate-500 text-xs font-medium mb-6 flex-1">
+                OAuth app install • Read-only data • Secure access
+              </p>
+              <form action="/connect/shopify/authorize" method="get" class="space-y-4">
+                <input
+                  type="text"
+                  name="shop"
+                  required
+                  placeholder="mystore.myshopify.com"
+                  class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-white/20 bg-white dark:bg-white/5 text-black dark:text-white text-sm font-medium focus:ring-2 focus:ring-black dark:focus:ring-white outline-none"
+                />
+                <button
+                  type="submit"
+                  class="w-full py-3 bg-green-600 hover:bg-green-700 text-white font-black text-sm uppercase tracking-widest rounded-lg transition-colors"
+                >
+                  Connect Shopify
+                </button>
+              </form>
+            </div>
+
+            <!-- WooCommerce -->
+            <div class="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl shadow-xl p-8 flex flex-col">
+              <div class="size-12 rounded-lg bg-purple-600 text-white flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-2xl">inventory_2</span>
+              </div>
+              <h2 class="text-xl font-black text-black dark:text-white uppercase tracking-tighter mb-2">WooCommerce</h2>
+              <p class="text-slate-500 text-xs font-medium mb-6 flex-1">
+                Store URL + REST API key & secret • Read-only
+              </p>
+              <a
+                href="/connect/woocommerce"
+                class="block w-full py-3 bg-purple-600 hover:bg-purple-700 text-white font-black text-sm uppercase tracking-widest rounded-lg transition-colors text-center"
+              >
+                Connect WooCommerce
+              </a>
+            </div>
+          </div>
+
+          <p class="mt-8 text-center text-xs text-slate-500">
+            We use read-only scopes. Your data stays in your store; we only pull orders, products, and inventory for forecasting.
+          </p>
+        </>
+      )}
+    </div>
+  </div>
+</Layout>

@@ -1,47 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { SignInForm } from '../components/auth/SignInForm';
 ---
 
-<Layout title="Login - ReOrder AI">
-  <main class="min-h-screen bg-background-light flex items-center justify-center px-4">
-    <div class="w-full max-w-md bg-white border border-slate-custom-200 rounded-xl shadow-xl p-8">
-      <div class="flex items-center gap-3 mb-8 justify-center">
-        <div class="w-10 h-10 bg-primary rounded flex items-center justify-center">
-          <span class="material-symbols-outlined text-white">analytics</span>
+<Layout title="Sign in - ReOrder AI">
+  <div class="min-h-screen flex items-center justify-center bg-background-light dark:bg-background-dark px-4">
+    <div class="w-full max-w-md">
+      <div class="text-center mb-10">
+        <div class="size-14 rounded-xl bg-black flex items-center justify-center text-white mx-auto mb-4">
+          <span class="material-symbols-outlined text-3xl">analytics</span>
         </div>
-        <span class="font-bold text-2xl text-primary tracking-tight">ReOrder AI</span>
+        <h1 class="text-2xl font-black tracking-tighter text-black dark:text-white uppercase">ReOrder AI</h1>
+        <p class="text-slate-500 text-sm font-bold uppercase tracking-widest mt-1">Sign in to your account</p>
       </div>
-
-      <h1 class="text-2xl font-bold text-primary text-center mb-2">Welcome back</h1>
-      <p class="text-sm text-slate-custom-600 text-center mb-6">Sign in to continue to your dashboard</p>
-
-      <form class="space-y-4">
-        <div>
-          <label for="email" class="block text-sm font-medium text-slate-custom-600 mb-1">Email</label>
-          <input id="email" type="email" placeholder="you@company.com" class="w-full rounded-md border border-slate-custom-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" />
-        </div>
-        <div>
-          <label for="password" class="block text-sm font-medium text-slate-custom-600 mb-1">Password</label>
-          <input id="password" type="password" placeholder="••••••••" class="w-full rounded-md border border-slate-custom-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" />
-        </div>
-
-        <div class="flex items-center justify-between text-sm">
-          <label class="inline-flex items-center gap-2 text-slate-custom-600">
-            <input type="checkbox" class="rounded border-slate-custom-200 text-primary focus:ring-primary" />
-            Remember me
-          </label>
-          <a href="#" class="text-primary hover:text-primary-hover font-medium">Forgot password?</a>
-        </div>
-
-        <a href="/dashboard" class="inline-flex w-full items-center justify-center rounded-md bg-primary px-4 py-2.5 text-white font-semibold hover:bg-primary-hover transition-colors">
-          Sign in
-        </a>
-      </form>
-
-      <p class="mt-6 text-center text-sm text-slate-custom-600">
-        New to ReOrder AI?
-        <a href="/" class="text-primary font-medium hover:text-primary-hover"> Back to home</a>
-      </p>
+      <div class="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl shadow-xl p-8">
+        <SignInForm client:load />
+        <p class="mt-6 text-center text-sm text-slate-500">
+          Don't have an account?
+          <a href="/signup" class="font-bold text-black dark:text-white underline underline-offset-2 hover:no-underline">Sign up</a>
+        </p>
+      </div>
     </div>
-  </main>
+  </div>
 </Layout>

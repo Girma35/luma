@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SignUpForm } from '../components/auth/SignUpForm';
+---
+
+<Layout title="Sign up - ReOrder AI">
+  <div class="min-h-screen flex items-center justify-center bg-background-light dark:bg-background-dark px-4">
+    <div class="w-full max-w-md">
+      <div class="text-center mb-10">
+        <div class="size-14 rounded-xl bg-black flex items-center justify-center text-white mx-auto mb-4">
+          <span class="material-symbols-outlined text-3xl">analytics</span>
+        </div>
+        <h1 class="text-2xl font-black tracking-tighter text-black dark:text-white uppercase">ReOrder AI</h1>
+        <p class="text-slate-500 text-sm font-bold uppercase tracking-widest mt-1">Create your account</p>
+      </div>
+      <div class="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl shadow-xl p-8">
+        <SignUpForm client:load />
+        <p class="mt-6 text-center text-sm text-slate-500">
+          Already have an account?
+          <a href="/login" class="font-bold text-black dark:text-white underline underline-offset-2 hover:no-underline">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,7 +1,11 @@
 import React from "react";
 import { skuDetailData } from "../../data/skuDetailData";
 
-export const SupplierInfo: React.FC = () => {
+interface SupplierInfoProps {
+    sku?: string;
+}
+
+export const SupplierInfo: React.FC<SupplierInfoProps> = () => {
     const { supplier } = skuDetailData;
 
     return (
