@@ -9,7 +9,8 @@ After=network.target
 User=deploy
 Group=deploy
 WorkingDirectory=/home/deploy/reorder-ai/dashboard
-Environment=HOST=127.0.0.1
+EnvironmentFile=/home/deploy/reorder-ai/dashboard/.env
+Environment=HOST=0.0.0.0
 Environment=PORT=4321
 Environment=NODE_ENV=production
 
@@ -21,11 +22,7 @@ StandardOutput=journal
 StandardError=journal
 SyslogIdentifier=reorder-dashboard
 
-# Security hardening
 NoNewPrivileges=true
-ProtectSystem=strict
-ProtectHome=read-only
-ReadWritePaths=/home/deploy/reorder-ai/dashboard
 
 [Install]
 WantedBy=multi-user.target

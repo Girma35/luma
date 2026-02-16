@@ -1,0 +1,46 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: root
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          script: |
+            set -e
+
+            echo "── Pulling latest code..."
+            cd /root/reorder-ai
+            git pull origin main
+
+            echo "── Syncing to deploy user..."
+            rsync -a --exclude='.venv' --exclude='node_modules' --exclude='.env' --exclude='*.db' --exclude='.git' \
+                /root/reorder-ai/ /home/deploy/reorder-ai/
+            chown -R deploy:deploy /home/deploy/reorder-ai
+
+            echo "── Updating Python deps..."
+            sudo -u deploy bash -c "cd /home/deploy/reorder-ai && .venv/bin/pip install -r requirements.txt -q"
+
+            echo "── Rebuilding dashboard..."
+            sudo -u deploy bash -c "cd /home/deploy/reorder-ai/dashboard && npm ci --production=false && npm run build"
+
+            echo "── Running migrations..."
+            sudo -u deploy bash -c "cd /home/deploy/reorder-ai && .venv/bin/alembic upgrade head"
+
+            echo "── Restarting services..."
+            systemctl restart reorder-api
+            systemctl restart reorder-dashboard
+
+            echo "── Health check..."
+            sleep 3
+            curl -sf http://127.0.0.1:8000/api/v1/health || echo "WARNING: API health check failed"
+
+            echo "── Deploy complete!"

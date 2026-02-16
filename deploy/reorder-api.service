@@ -4,7 +4,6 @@
 [Unit]
 Description=ReOrder AI — FastAPI Backend
 After=network.target postgresql.service
-Wants=postgresql.service
 
 [Service]
 User=deploy
@@ -22,11 +21,7 @@ StandardOutput=journal
 StandardError=journal
 SyslogIdentifier=reorder-api
 
-# Security hardening
 NoNewPrivileges=true
-ProtectSystem=strict
-ProtectHome=read-only
-ReadWritePaths=/home/deploy/reorder-ai
 
 [Install]
 WantedBy=multi-user.target

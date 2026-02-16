@@ -1,0 +1,359 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Demo — ReOrder AI">
+  <div class="bg-background-light text-slate-900 font-display antialiased min-h-screen">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white border-b border-slate-custom-200 w-full">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-20 items-center">
+          <div class="flex items-center">
+            <a class="flex-shrink-0 flex items-center gap-2" href="/">
+              <div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+                <span class="material-symbols-outlined text-white text-lg">analytics</span>
+              </div>
+              <span class="font-bold text-xl tracking-tight text-primary">ReOrder AI</span>
+            </a>
+          </div>
+          <div class="hidden md:flex space-x-8">
+            <a class="text-sm font-medium text-slate-custom-600 hover:text-primary transition-colors" href="/#features">Solutions</a>
+            <a class="text-sm font-medium text-primary border-b-2 border-primary pb-1" href="/demo">Demo</a>
+            <a class="text-sm font-medium text-slate-custom-600 hover:text-primary transition-colors" href="/#pricing">Pricing</a>
+            <a class="text-sm font-medium text-slate-custom-600 hover:text-primary transition-colors" href="/#trust">Resources</a>
+          </div>
+          <div class="flex items-center">
+            <a class="ml-4 inline-flex items-center justify-center px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-hover transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" href="/login">
+              Get Started
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-16 lg:py-24 bg-white border-b border-slate-custom-200">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="inline-flex items-center px-3 py-1 rounded-full border border-slate-custom-200 bg-white mb-6">
+          <span class="flex h-2 w-2 rounded-full bg-accent-green mr-2"></span>
+          <span class="text-xs font-medium text-slate-custom-600 uppercase tracking-wide">Interactive Demo</span>
+        </div>
+        <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-primary mb-6">
+          See ReOrder AI in Action
+        </h1>
+        <p class="text-lg text-slate-custom-600 max-w-2xl mx-auto">
+          Watch how our platform predicts stockouts, automates reordering, and saves e-commerce teams thousands in lost revenue — or chat with our AI assistant to learn more.
+        </p>
+      </div>
+    </section>
+
+    <!-- Demo Videos -->
+    <section class="py-20 bg-background-light">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <h2 class="text-3xl font-bold text-primary mb-3">Platform Walkthrough</h2>
+          <p class="text-slate-custom-600">Short videos covering each core feature.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Video 1: Dashboard Overview -->
+          <div class="bg-white rounded-xl border border-slate-custom-200 overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="aspect-video bg-slate-100 flex items-center justify-center relative group cursor-pointer">
+              <div class="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"></div>
+              <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-white text-3xl ml-1">play_arrow</span>
+              </div>
+              <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-2 py-1 rounded">2:30</span>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="material-symbols-outlined text-primary text-sm">dashboard</span>
+                <span class="text-xs font-medium text-slate-500 uppercase tracking-wide">Overview</span>
+              </div>
+              <h3 class="text-lg font-bold text-primary mb-2">Dashboard & KPIs</h3>
+              <p class="text-sm text-slate-custom-600">See your entire inventory health at a glance — stockout risks, reorder suggestions, and revenue impact in one view.</p>
+            </div>
+          </div>
+
+          <!-- Video 2: Connect Store -->
+          <div class="bg-white rounded-xl border border-slate-custom-200 overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="aspect-video bg-slate-100 flex items-center justify-center relative group cursor-pointer">
+              <div class="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"></div>
+              <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-white text-3xl ml-1">play_arrow</span>
+              </div>
+              <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-2 py-1 rounded">1:45</span>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="material-symbols-outlined text-primary text-sm">link</span>
+                <span class="text-xs font-medium text-slate-500 uppercase tracking-wide">Setup</span>
+              </div>
+              <h3 class="text-lg font-bold text-primary mb-2">Connect Your Store</h3>
+              <p class="text-sm text-slate-custom-600">Connect Shopify or WooCommerce in under 2 minutes. Your inventory syncs automatically, no CSV uploads needed.</p>
+            </div>
+          </div>
+
+          <!-- Video 3: Forecasting -->
+          <div class="bg-white rounded-xl border border-slate-custom-200 overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="aspect-video bg-slate-100 flex items-center justify-center relative group cursor-pointer">
+              <div class="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"></div>
+              <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-white text-3xl ml-1">play_arrow</span>
+              </div>
+              <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-2 py-1 rounded">3:10</span>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="material-symbols-outlined text-primary text-sm">trending_up</span>
+                <span class="text-xs font-medium text-slate-500 uppercase tracking-wide">AI</span>
+              </div>
+              <h3 class="text-lg font-bold text-primary mb-2">Demand Forecasting</h3>
+              <p class="text-sm text-slate-custom-600">Our AI predicts demand 30, 60, and 90 days out with confidence intervals — so you know exactly when and how much to reorder.</p>
+            </div>
+          </div>
+
+          <!-- Video 4: Alerts -->
+          <div class="bg-white rounded-xl border border-slate-custom-200 overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="aspect-video bg-slate-100 flex items-center justify-center relative group cursor-pointer">
+              <div class="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"></div>
+              <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-white text-3xl ml-1">play_arrow</span>
+              </div>
+              <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-2 py-1 rounded">1:55</span>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="material-symbols-outlined text-primary text-sm">notifications_active</span>
+                <span class="text-xs font-medium text-slate-500 uppercase tracking-wide">Alerts</span>
+              </div>
+              <h3 class="text-lg font-bold text-primary mb-2">Stockout & Risk Alerts</h3>
+              <p class="text-sm text-slate-custom-600">Get notified before a stockout happens. See which SKUs are critical and what action to take immediately.</p>
+            </div>
+          </div>
+
+          <!-- Video 5: Reorder Simulator -->
+          <div class="bg-white rounded-xl border border-slate-custom-200 overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="aspect-video bg-slate-100 flex items-center justify-center relative group cursor-pointer">
+              <div class="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"></div>
+              <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-white text-3xl ml-1">play_arrow</span>
+              </div>
+              <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-2 py-1 rounded">2:15</span>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="material-symbols-outlined text-primary text-sm">science</span>
+                <span class="text-xs font-medium text-slate-500 uppercase tracking-wide">Tools</span>
+              </div>
+              <h3 class="text-lg font-bold text-primary mb-2">Reorder Simulator</h3>
+              <p class="text-sm text-slate-custom-600">Test different reorder strategies before committing. See the cost impact of ordering more or less before you place a PO.</p>
+            </div>
+          </div>
+
+          <!-- Video 6: Supplier View -->
+          <div class="bg-white rounded-xl border border-slate-custom-200 overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="aspect-video bg-slate-100 flex items-center justify-center relative group cursor-pointer">
+              <div class="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"></div>
+              <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-white text-3xl ml-1">play_arrow</span>
+              </div>
+              <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-2 py-1 rounded">1:30</span>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="material-symbols-outlined text-primary text-sm">local_shipping</span>
+                <span class="text-xs font-medium text-slate-500 uppercase tracking-wide">Supply Chain</span>
+              </div>
+              <h3 class="text-lg font-bold text-primary mb-2">Supplier Management</h3>
+              <p class="text-sm text-slate-custom-600">Track supplier lead times, reliability scores, and manage multiple vendors per SKU from one place.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Agent Chat Section -->
+    <section class="py-20 bg-white border-t border-slate-custom-200">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center px-3 py-1 rounded-full border border-slate-custom-200 bg-white mb-4">
+            <span class="material-symbols-outlined text-primary text-sm mr-1.5">smart_toy</span>
+            <span class="text-xs font-medium text-slate-custom-600 uppercase tracking-wide">AI Assistant</span>
+          </div>
+          <h2 class="text-3xl font-bold text-primary mb-3">Ask Our AI Anything</h2>
+          <p class="text-slate-custom-600 max-w-xl mx-auto">Have questions about features, pricing, or how ReOrder AI fits your business? Chat with our assistant — it knows the platform inside out.</p>
+        </div>
+
+        <!-- Chat Interface -->
+        <div class="bg-white rounded-2xl border border-slate-custom-200 shadow-xl overflow-hidden max-w-2xl mx-auto">
+          <!-- Chat Header -->
+          <div class="bg-primary px-6 py-4 flex items-center gap-3">
+            <div class="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center">
+              <span class="material-symbols-outlined text-white text-lg">smart_toy</span>
+            </div>
+            <div>
+              <h4 class="text-white font-semibold text-sm">ReOrder AI Assistant</h4>
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 bg-accent-green rounded-full"></span>
+                <span class="text-white/70 text-xs">Online</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Messages -->
+          <div id="chat-messages" class="p-6 h-96 overflow-y-auto space-y-4 bg-slate-50">
+            <!-- Bot welcome message -->
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-white text-sm">smart_toy</span>
+              </div>
+              <div class="bg-white rounded-2xl rounded-tl-md px-4 py-3 shadow-sm border border-slate-100 max-w-[80%]">
+                <p class="text-sm text-slate-700">Hi! I'm the ReOrder AI assistant. I can help you understand how our platform works, answer questions about features, or help you decide if it's right for your store. What would you like to know?</p>
+              </div>
+            </div>
+
+            <!-- Suggested questions -->
+            <div class="flex flex-wrap gap-2 ml-11">
+              <button class="suggestion-btn text-xs px-3 py-1.5 rounded-full border border-slate-200 bg-white text-slate-600 hover:border-primary hover:text-primary transition-colors cursor-pointer">
+                How does forecasting work?
+              </button>
+              <button class="suggestion-btn text-xs px-3 py-1.5 rounded-full border border-slate-200 bg-white text-slate-600 hover:border-primary hover:text-primary transition-colors cursor-pointer">
+                What platforms do you support?
+              </button>
+              <button class="suggestion-btn text-xs px-3 py-1.5 rounded-full border border-slate-200 bg-white text-slate-600 hover:border-primary hover:text-primary transition-colors cursor-pointer">
+                How fast is the setup?
+              </button>
+              <button class="suggestion-btn text-xs px-3 py-1.5 rounded-full border border-slate-200 bg-white text-slate-600 hover:border-primary hover:text-primary transition-colors cursor-pointer">
+                What does it cost?
+              </button>
+            </div>
+          </div>
+
+          <!-- Chat Input -->
+          <div class="border-t border-slate-200 p-4 bg-white">
+            <div class="flex items-center gap-3">
+              <input
+                id="chat-input"
+                type="text"
+                placeholder="Ask a question about ReOrder AI..."
+                class="flex-1 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+              />
+              <button
+                id="chat-send"
+                class="w-10 h-10 bg-primary hover:bg-primary-hover rounded-xl flex items-center justify-center transition-colors flex-shrink-0"
+              >
+                <span class="material-symbols-outlined text-white text-lg">send</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-primary py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Ready to prevent your next stockout?</h2>
+        <p class="text-lg text-white/70 mb-8 max-w-xl mx-auto">Start your free trial today. No credit card required. Connect your store in under 2 minutes.</p>
+        <a class="inline-flex justify-center items-center px-8 py-4 border-2 border-white text-base font-bold rounded-md text-white hover:bg-white hover:text-primary md:text-lg transition-all" href="/signup">
+          Start Free Trial
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-custom-200 py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-sm text-slate-400">&copy; 2025 ReOrder AI. All rights reserved.</p>
+        <div class="flex items-center gap-2 mt-4 md:mt-0">
+          <span class="w-2 h-2 bg-accent-green rounded-full"></span>
+          <span class="text-xs text-slate-500 font-medium">Systems Operational</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</Layout>
+
+<script>
+  const knowledgeBase: Record<string, string> = {
+    "forecasting": "ReOrder AI uses AWS Forecast (machine learning) as the primary engine, with a lightweight statistical fallback (Holt-Winters exponential smoothing) for edge cases. We predict demand at 30, 60, and 90-day horizons with confidence intervals. The model trains on your actual sales history — the more data you have, the more accurate it gets. No GPU required on your end.",
+    "platforms": "We currently support Shopify and WooCommerce. You connect your store through our dashboard — just enter your credentials and we sync your inventory and order history automatically. No CSV uploads, no manual data entry.",
+    "setup": "Setup takes under 2 minutes. Connect your Shopify or WooCommerce store, and we start syncing immediately. Our AI needs about 7-14 days of sales history to produce reliable forecasts, but you'll see your inventory health dashboard right away.",
+    "cost": "Our Enterprise Standard plan is $99/month per user. It includes all features: stockout alerts, demand forecasting (30/60/90 days), suggested order quantities, dead-stock detection, Shopify & WooCommerce sync, the full dashboard, reorder simulator, and supplier management. 99.9% uptime SLA included.",
+    "stockouts": "ReOrder AI monitors your inventory levels against predicted demand and alerts you before a stockout happens. You'll see which SKUs are at risk, how many days of stock remain, and exactly how much to reorder. Our users report a 30% reduction in stockouts within the first quarter.",
+    "data": "Your data is encrypted in transit (TLS 1.3) and at rest. We're SOC2 Type II certified, GDPR compliant, and ISO 27001 certified. We never share your data with third parties. You can delete your data at any time.",
+    "default": "That's a great question! While I can answer common questions about ReOrder AI, for more specific inquiries I'd recommend starting a free trial to see the platform firsthand, or contacting our team at sales@reorderai.com. Is there anything else I can help with?"
+  };
+
+  function getResponse(input: string): string {
+    const lower = input.toLowerCase();
+    if (lower.includes("forecast") || lower.includes("predict") || lower.includes("ai") || lower.includes("model"))
+      return knowledgeBase["forecasting"];
+    if (lower.includes("shopify") || lower.includes("woo") || lower.includes("platform") || lower.includes("integrat") || lower.includes("support"))
+      return knowledgeBase["platforms"];
+    if (lower.includes("setup") || lower.includes("fast") || lower.includes("start") || lower.includes("connect") || lower.includes("long"))
+      return knowledgeBase["setup"];
+    if (lower.includes("cost") || lower.includes("price") || lower.includes("pricing") || lower.includes("pay") || lower.includes("plan") || lower.includes("$"))
+      return knowledgeBase["cost"];
+    if (lower.includes("stockout") || lower.includes("alert") || lower.includes("risk") || lower.includes("reorder"))
+      return knowledgeBase["stockouts"];
+    if (lower.includes("data") || lower.includes("security") || lower.includes("safe") || lower.includes("gdpr") || lower.includes("soc"))
+      return knowledgeBase["data"];
+    return knowledgeBase["default"];
+  }
+
+  function addMessage(text: string, isUser: boolean) {
+    const container = document.getElementById("chat-messages")!;
+
+    const wrapper = document.createElement("div");
+    wrapper.className = `flex items-start gap-3 ${isUser ? "justify-end" : ""}`;
+
+    if (isUser) {
+      wrapper.innerHTML = `
+        <div class="bg-primary rounded-2xl rounded-tr-md px-4 py-3 max-w-[80%]">
+          <p class="text-sm text-white">${text}</p>
+        </div>
+      `;
+    } else {
+      wrapper.innerHTML = `
+        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-white text-sm">smart_toy</span>
+        </div>
+        <div class="bg-white rounded-2xl rounded-tl-md px-4 py-3 shadow-sm border border-slate-100 max-w-[80%]">
+          <p class="text-sm text-slate-700">${text}</p>
+        </div>
+      `;
+    }
+
+    container.appendChild(wrapper);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function sendMessage(text?: string) {
+    const input = document.getElementById("chat-input") as HTMLInputElement;
+    const message = text || input.value.trim();
+    if (!message) return;
+
+    addMessage(message, true);
+    input.value = "";
+
+    // Remove suggestion buttons after first interaction
+    const suggestions = document.querySelectorAll(".suggestion-btn");
+    suggestions.forEach(btn => (btn as HTMLElement).parentElement?.remove());
+
+    // Simulate typing delay
+    setTimeout(() => {
+      addMessage(getResponse(message), false);
+    }, 600);
+  }
+
+  document.getElementById("chat-send")?.addEventListener("click", () => sendMessage());
+  document.getElementById("chat-input")?.addEventListener("keydown", (e) => {
+    if ((e as KeyboardEvent).key === "Enter") sendMessage();
+  });
+
+  document.querySelectorAll(".suggestion-btn").forEach(btn => {
+    btn.addEventListener("click", () => sendMessage((btn as HTMLElement).textContent?.trim()));
+  });
+</script>
